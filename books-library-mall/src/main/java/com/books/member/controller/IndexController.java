@@ -6,6 +6,8 @@ import cn.hutool.json.JSONObject;
 import com.books.entity.member.Member;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.books.member.service.IndexService;
@@ -17,12 +19,14 @@ public class IndexController {
 	private IndexService IndexService;
 	
 	
-	@GetMapping
+	@GetMapping("/hi")
 	public String index() {
 		return "hi";
 	}
 	
-	@GetMapping("/v1/demo")
+	
+	@RequestMapping("/v1/demo")
+	@ResponseBody
 	public Member demo() {
 		return IndexService.demo();
 	}
