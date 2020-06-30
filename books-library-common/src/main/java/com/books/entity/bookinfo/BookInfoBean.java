@@ -3,6 +3,7 @@ package com.books.entity.bookinfo;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 
@@ -35,6 +36,12 @@ public class BookInfoBean {
 
     private String isdel;
 
+    @TableField(exist = false)
+    private Integer[] typeIds;
+    
+    @TableField(exist = false)
+    private Integer[] labelIds;
+    
     public Integer getId() {
         return id;
     }
@@ -106,4 +113,23 @@ public class BookInfoBean {
     public void setIsdel(String isdel) {
         this.isdel = isdel == null ? null : isdel.trim();
     }
+
+	public Integer[] getTypeIds() {
+		return typeIds;
+	}
+
+	public void setTypeIds(Integer[] typeIds) {
+		this.typeIds = typeIds;
+	}
+
+	public Integer[] getLabelIds() {
+		return labelIds;
+	}
+
+	public void setLabelIds(Integer[] labelIds) {
+		this.labelIds = labelIds;
+	}
+
+	
+    
 }

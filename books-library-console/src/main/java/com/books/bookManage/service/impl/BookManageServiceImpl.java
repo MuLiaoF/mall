@@ -9,9 +9,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.books.bookManage.mapper.BookInfoLabelMapper;
 import com.books.bookManage.mapper.BookInfoMapper;
+import com.books.bookManage.mapper.BookInfoTypeMapper;
 import com.books.bookManage.service.IBookManageService;
 import com.books.entity.bookinfo.BookInfoBean;
 import com.books.util.base.ConstantUtils;
@@ -33,11 +36,18 @@ public class BookManageServiceImpl implements IBookManageService{
 
 	@Autowired
 	private BookInfoMapper mapper;
+	@Autowired
+	private BookInfoTypeMapper bookInfoTypeMapper;
+	@Autowired
+	private BookInfoLabelMapper bookInfoLabelMapper;
+	
 	// 获取文件路径
 	@Value("${upload_file_path_default_img}")
 	private String defaultImgUrl;
 	@Value("${upload_file_path_other_img}")
 	private String otherImgUrl;
+	
+	@Transactional
 	@Override
 	public ResultData<String> uploadBookInfo(BookInfoBean bookInfo, MultipartFile[] files, MultipartFile defaultFile) throws Exception {
 		ResultData<String> result =new ResultData<String>();
@@ -99,6 +109,14 @@ public class BookManageServiceImpl implements IBookManageService{
 		bookInfo.setUpdateTime(DateUtil.date());
 		
 		mapper.insert(bookInfo);
+		// insert to 图书分类关系表
+		Integer[] typeIds= {1,2,3,4};
+		Integer[] labelIds= {1,2,3,4};
+		bookInfo.setTypeIds(typeIds);
+		bookInfo.setLabelIds(labelIds);
+		bookInfoTypeMapper.addBookInfoType(bookInfo);
+		// insert to 图书标签关系表
+		bookInfoLabelMapper.addBookInfoLabel(bookInfo);
 		return result;
 	}
 

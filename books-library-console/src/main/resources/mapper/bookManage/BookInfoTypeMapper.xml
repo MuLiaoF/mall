@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.bookManage.mapper.BookInfoTypeMapper">
+   
+
+<insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
+
+	insert into tbl_book_info_type (id,type_id,book_info_id,isdel,create_time) values
+	<foreach collection="typeIds" index="index" item="item"  separator=",">
+	    (null, #{item},#{id},#{isdel},#{createTime})
+	</foreach>
+
+</insert>
+   
+
+
+</mapper>
