@@ -59,6 +59,7 @@ public class BookInfoController {
 			result.setMsg("写入文件异常！！！");
 			log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"写入文件异常！！！"));
 			e.printStackTrace();
+			return result;
 		}
 		return result;
 		
