@@ -2,14 +2,42 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.member.mapper.IndexMapper">
     <!-- 通用查询映射结果 -->
-    <resultMap id="baseResultMap" type="com.books.entity.member.Member">
-        <id column="id" property="id"/>
+    <resultMap type="com.books.entity.member.SysAuthUser" id="SysUserResult">
+        <id     property="id"       column="id"      />
+        <result property="userId"       column="user_id"      />
+        <result property="deptId"       column="dept_id"      />
+        <result property="userName"     column="user_name"    />
+        <result property="nickName"     column="nick_name"    />
+        <result property="email"        column="email"        />
+        <result property="phonenumber"  column="phonenumber"  />
+        <result property="sex"          column="sex"          />
+        <result property="avatar"       column="avatar"       />
+        <result property="password"     column="password"     />
+        <result property="status"       column="status"       />
+        <result property="delFlag"      column="del_flag"     />
+        <result property="loginIp"      column="login_ip"     />
+        <result property="loginDate"    column="login_date"   />
+        <result property="createTime"   column="create_time"  />
+        <result property="sessionKey"     column="session_key"    />
+        <result property="updateTime"   column="update_time"  />
+        <result column="reserve1" property="reserve1" jdbcType="VARCHAR"/>
+        <result column="reserve2" property="reserve2" jdbcType="VARCHAR"/>
+        <result column="avatar_url" property="avatarUrl"
+                jdbcType="VARCHAR"/>
+        <result column="gender" property="gender" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+        <result column="province" property="province"
+                jdbcType="VARCHAR"/>
+        <result column="country" property="country" jdbcType="VARCHAR"/>
+        <result column="language" property="language"
+                jdbcType="VARCHAR"/>
+        <result column="appid" property="appid" jdbcType="VARCHAR"/>
+        <result column="openid" property="openid" jdbcType="VARCHAR"/>
+        <result column="mid" property="mid" jdbcType="INTEGER"/>
+        <result column="unionid" property="unionid" jdbcType="VARCHAR"/>
     </resultMap>
 
 
-    <select id="select" resultType="com.books.entity.member.Member">
-        select * from tbl_mem_member where id = #{id}
-    </select>
 
 
 </mapper>
