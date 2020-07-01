@@ -1,7 +1,7 @@
-package cn.wandingkeji.auth.web.response;
+package com.books.response.member;
 
-import cn.wandingkeji.member.entity.MemMemberInfo;
-import cn.wandingkeji.system.entity.SysAuthUser;
+import com.books.entity.member.MemMemberInfo;
+import com.books.entity.member.SysAuthUser;
 import lombok.Data;
 
 /**

@@ -1,6 +1,6 @@
-package cn.wandingkeji.member.entity;
+package com.books.entity.member;
 
-import cn.wandingkeji.comm.bean.BaseEntity;
+import com.books.util.base.BaseEntity;
 import lombok.Data;
 
 import java.util.Date;

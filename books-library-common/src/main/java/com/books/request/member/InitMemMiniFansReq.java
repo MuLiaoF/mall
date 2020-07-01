@@ -1,4 +1,4 @@
-package cn.wandingkeji.member.request;
+package com.books.request.member;
 
 import lombok.Data;
 

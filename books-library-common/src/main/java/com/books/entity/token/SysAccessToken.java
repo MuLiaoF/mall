@@ -1,6 +1,6 @@
-package cn.wandingkeji.token.entity;
+package com.books.entity.token;
 
-import cn.wandingkeji.comm.utils.BaseEntity;
+import com.books.util.base.BaseEntity;
 import lombok.Data;
 
 /**

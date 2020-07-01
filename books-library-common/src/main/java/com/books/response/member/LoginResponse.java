@@ -1,4 +1,4 @@
-package cn.wandingkeji.auth.web.response;
+package com.books.response.member;
 
 import lombok.Data;
 

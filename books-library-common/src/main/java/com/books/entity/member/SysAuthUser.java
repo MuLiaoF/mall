@@ -1,12 +1,11 @@
-package cn.wandingkeji.system.entity;
+package com.books.entity.member;
 
-import java.util.Date;
-
-import cn.wandingkeji.common.core.domain.BaseEntity;
+import com.books.util.base.BaseEntity;
 import lombok.Data;
-
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import java.util.Date;
 
 /**
  * 用户对象 sys_user
@@ -137,9 +136,7 @@ public class SysAuthUser extends BaseEntity
                 .append("loginIp", getLoginIp())
                 .append("loginDate", getLoginDate())
                 .append("createTime", getCreateTime())
-                .append("updateBy", getUpdateBy())
                 .append("updateTime", getUpdateTime())
-                .append("remark", getRemark())
                 .toString();
     }
 }
