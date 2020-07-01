@@ -131,4 +131,28 @@ public class BookTypeController {
         }
         return resultData;
     }
+
+    /**
+     * 根据ID修改信息,参数中有那个字段就修改那个字段
+     * 测试：http://localhost:8081/books/updateById?id=8&typeName=a
+     *      http://localhost:8081/books/updateById?id=8&isdel=0
+     *      http://localhost:8081/books/updateById?id=8&status=0
+     *      http://localhost:8081/books/updateById?id=8&status=1&typeName=b
+     *      http://localhost:8081/books/updateById?id=8&status=1&typeName=c&isdel=1
+     * @param bean
+     * @return
+     */
+    @RequestMapping("/updateById")
+    public ResultData<String> updateTypeById(BookTypeBean bean){
+        ResultData<String> resultData = new ResultData<>();
+        try{
+            resultData = service.updateTypeById(bean);
+        }catch (Exception e){
+            resultData.setCode(ConstantUtils.ERROR_CODE);
+            resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
+            resultData.setMsg("更新失败!");
+            return ExceptionConstantsUtils.printErrorMessage(log,e,"更新异常");
+        }
+        return resultData;
+    }
 }

@@ -38,4 +38,9 @@ public interface IBookTypeService {
      * @return
      */
     ResultData<Object> selectTypeAll();
+    /**
+     * 根据ID修改信息
+     * @param bookTypeBean 图书类型
+     */
+    ResultData<String> updateTypeById(BookTypeBean bookTypeBean);
 }

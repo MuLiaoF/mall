@@ -116,4 +116,19 @@ public class BookTypeServiceImpl implements IBookTypeService {
         resultData.setObj(mapper.selectTypeAll());
         return resultData;
     }
+
+    /**
+     * 根据ID修改图书类型信息
+     * @param bookTypeBean 图书类型
+     * @return
+     */
+    @Override
+    public ResultData<String> updateTypeById(BookTypeBean bookTypeBean) {
+        mapper.updateTypeById(bookTypeBean);
+        ResultData<String> resultData = new ResultData<>();
+        resultData.setCode(ConstantUtils.SUCCESS_CODE);
+        resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
+        resultData.setMsg("修改成功");
+        return resultData;
+    }
 }
