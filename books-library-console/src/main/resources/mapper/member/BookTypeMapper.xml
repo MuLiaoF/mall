@@ -21,4 +21,12 @@
     <select id="queryTypeExists" parameterType="string" resultType="int">
         SELECT DISTINCT IF(EXISTS(SELECT * FROM tbl_book_type WHERE type_name = #{type_name}),1,0) AS a FROM tbl_book_type
     </select>
+    <!--根据ID查询-->
+    <select id="selectTypeById" parameterType="int" resultType="com.books.entity.booktype.BookTypeBean">
+        SELECT id,pid,type_name,isdel,status FROM tbl_book_type WHERE id = #{id}
+    </select>
+    <!--查询所有-->
+    <select id="selectTypeAll" resultType="com.books.entity.booktype.BookTypeBean">
+        SELECT id,pid,type_name,isdel,status FROM tbl_book_type
+    </select>
 </mapper>
