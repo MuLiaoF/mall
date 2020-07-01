@@ -1,12 +1,12 @@
 package com.books.util.token;
 
-import cn.wandingkeji.common.enums.ErrorCodesEnum;
-import cn.wandingkeji.common.system.exception.BussinessException;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.Claim;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.books.util.enums.ErrorCodesEnum;
+import com.books.util.exception.BussinessException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 

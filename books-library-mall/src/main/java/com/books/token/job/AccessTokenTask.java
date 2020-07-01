@@ -30,7 +30,7 @@ public class AccessTokenTask {
         log.info("===自动更新AccessToken轮训任务开始===,过期时间:{}", intervalTime);
         for (AccessToken accessTokenCache : accessTokenCaches) {
             log.info("更新过期的AccessToken:{}", accessTokenCache);
-            GlobalAccessTokenHelper.updateAccessTokenToCacheAndDB(accessTokenCache, false);
+           // GlobalAccessTokenHelper.updateAccessTokenToCacheAndDB(accessTokenCache, false);
         }
         log.info("===自动更新AccessToken轮训任务结束===,过期时间:{}", intervalTime);
     }
@@ -45,7 +45,7 @@ public class AccessTokenTask {
         accessTokenCaches.forEach(e -> {
             if (AccessTokenTypeEnum.FIVE.getValue() == e.getType()) {
                 log.info("更新类型为{}过期的AccessToken:{}", AccessTokenTypeEnum.FIVE.getValue(), e);
-                GlobalAccessTokenHelper.updateAccessTokenToCacheAndDB(e, false);
+                //GlobalAccessTokenHelper.updateAccessTokenToCacheAndDB(e, false);
             }
         });
         log.info("===自动更新类型为{}的AccessToken轮训任务结束===类型{},过期时间:{}", AccessTokenTypeEnum.FIVE.getValue(),

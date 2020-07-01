@@ -61,9 +61,6 @@ public class AuthUserServiceImpl implements IAuthUserService {
         String appid = memMiniFansReq.getAppid();
         String code = memMiniFansReq.getCode();
 
-        TokenRes tokenRes = new TokenRes();
-        //tokenRes.setTokenUrl(tokenUrl);
-        //tokenRes.setTokenType(5);
         SysAccessToken sysAccessToken = systemBaseMapper.getByAppId(appid);
         if(sysAccessToken == null && null == sysAccessToken.getThirdmid()) {
             throw new BussinessException(500 ,"APPID不存在");
