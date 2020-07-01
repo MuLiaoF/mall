@@ -2,6 +2,7 @@ package com.books.bookManage.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,7 @@ import com.books.util.base.ResultData;
 
 @Controller
 @RequestMapping("/bookInfoController")
+@Slf4j
 public class BookInfoController {
 
 	
@@ -36,8 +38,7 @@ public class BookInfoController {
 	public String defaultImgUrl;
 	@Value("upload_file_path_other_img")
 	public String otherImgUrl;
-	
-	private static final  Logger log = LogManager.getLogger(BookInfoController.class);
+
 	/**
 	 * 
 	 * @param bookInfo
@@ -57,7 +58,7 @@ public class BookInfoController {
 			result.setCode(ConstantUtils.ERROR_CODE);
 			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
 			result.setMsg("写入文件异常！！！");
-			log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"写入文件异常！！！"));
+			ExceptionConstantsUtils.printErrorMessage(log, e ,"写入文件异常！！！");
 			e.printStackTrace();
 			return result;
 		}

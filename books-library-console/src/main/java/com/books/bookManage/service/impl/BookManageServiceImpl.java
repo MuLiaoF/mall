@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,7 @@ import cn.hutool.json.JSONUtil;
 */
 
 @Service
+@Slf4j
 public class BookManageServiceImpl implements IBookManageService{
 
 	@Autowired

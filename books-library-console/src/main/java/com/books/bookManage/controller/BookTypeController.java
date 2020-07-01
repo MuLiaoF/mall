@@ -6,6 +6,7 @@ import com.books.entity.booktype.BookTypeBean;
 import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +21,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/books")
+@Slf4j
 public class BookTypeController {
 
-    private static final Logger log = LogManager.getLogger(BookTypeController.class);
 
 
     @Autowired
-    IBookTypeService service;
+    private IBookTypeService service;
 
     /**
      * 插入图书类型
@@ -47,7 +48,7 @@ public class BookTypeController {
             resultData.setCode(ConstantUtils.ERROR_CODE);
             resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
             resultData.setMsg("添加图书类型失败！");
-            log.info(ExceptionConstantsUtils.printErrorMessage(log,ex,"添加图书异常"));
+            ExceptionConstantsUtils.printErrorMessage(log,ex,"添加图书异常");
         }
         return resultData;
     }
@@ -67,7 +68,7 @@ public class BookTypeController {
             resultData.setCode(ConstantUtils.ERROR_CODE);
             resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
             resultData.setMsg("删除失败！");
-            log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"删除异常"));
+            return ExceptionConstantsUtils.printErrorMessage(log,e,"删除异常");
         }
         return resultData;
     }
@@ -87,7 +88,7 @@ public class BookTypeController {
             resultData.setCode(ConstantUtils.ERROR_CODE);
             resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
             resultData.setMsg("通过类型名称删除失败！");
-            log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"通过类型名称删除异常"));
+            return ExceptionConstantsUtils.printErrorMessage(log,e,"通过类型名称删除异常");
         }
         return resultData;
     }
@@ -107,7 +108,7 @@ public class BookTypeController {
             resultData.setCode(ConstantUtils.ERROR_CODE);
             resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
             resultData.setMsg("查询失败");
-            log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"通过ID查询异常"));
+            return ExceptionConstantsUtils.printErrorMessage(log,e,"通过ID查询异常");
         }
         return resultData;
     }
@@ -126,7 +127,7 @@ public class BookTypeController {
             resultData.setCode(ConstantUtils.ERROR_CODE);
             resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
             resultData.setMsg("查询失败!");
-            log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"查询异常"));
+            return ExceptionConstantsUtils.printErrorMessage(log,e,"查询异常");
         }
         return resultData;
     }
