@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,18 +28,15 @@ import com.books.util.base.ResultData;
 */
 @Controller
 @RequestMapping("/goodsManageController")
+@Slf4j
 public class GoodsManageController {
 
 	@Autowired
 	private IGoodsManageService service;
-	
-	private static final  Logger log = LogManager.getLogger(GoodsManageController.class);
-	
-	
+
 	/**
 	 * 查询商品信息
 	 * @param goodsInfoBean
-	 * @param goodsStockNumberBean
 	 * @param req
 	 * @return
 	 */
@@ -52,9 +50,9 @@ public class GoodsManageController {
 			result.setCode(ConstantUtils.ERROR_CODE);
 			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
 			result.setMsg("商品查询失败！");
-			log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"商品查询失败！"));
+			ExceptionConstantsUtils.printErrorMessage(log, e, "商品查询失败！");
 		}
-		return result;
+		return ExceptionConstantsUtils.printSuccessMessage(log,"商品查询失败！", result);
 		
 	} 
 	/**
@@ -74,7 +72,7 @@ public class GoodsManageController {
 			result.setCode(ConstantUtils.ERROR_CODE);
 			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
 			result.setMsg("商品编辑失败！");
-			log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"商品编辑失败！"));
+			ExceptionConstantsUtils.printErrorMessage(log,e,"商品编辑失败！");
 		}
 		return result;
 		
@@ -97,10 +95,10 @@ public class GoodsManageController {
 			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
 			if(ConstantUtils.isPut.equals(goodsInfoBean.getIsOff())) {
 				result.setMsg("商品上架失败!");
-				log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"商品上架失败！"));
+				ExceptionConstantsUtils.printErrorMessage(log,e,"商品上架失败！");
 			}else {
 				result.setMsg("商品下架失败!");
-				log.info(ExceptionConstantsUtils.printErrorMessage(log,e,"商品下架失败！"));
+				ExceptionConstantsUtils.printErrorMessage(log,e,"商品下架失败！");
 			}
 			
 		}

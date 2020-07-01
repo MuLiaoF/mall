@@ -19,7 +19,7 @@ public class ResultData<T> implements Serializable{
 	/**
 	 * 返回码      200 / 10000
 	 */
-	private String code;  
+	private Integer code;
 	/**
 	 * 成功/失败  true / false
 	 */
@@ -33,10 +33,10 @@ public class ResultData<T> implements Serializable{
 	 */
 	private T obj;
 	
-	public String getCode() {
+	public Integer getCode() {
 		return code;
 	}
-	public void setCode(String code) {
+	public void setCode(Integer code) {
 		this.code = code;
 	}
 	public Boolean getSuccess() {

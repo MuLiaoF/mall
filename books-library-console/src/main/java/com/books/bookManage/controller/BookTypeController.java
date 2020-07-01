@@ -41,16 +41,16 @@ public class BookTypeController {
         try{
             //插入
             service.addOneBookType(bookTypeBean);
-            resultData.setCode(ConstantUtils.SUCCESS_CODE);
-            resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-            resultData.setMsg("添加图书类型成功！");
+            //resultData.setCode(ConstantUtils.SUCCESS_CODE);
+            //resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
+            //resultData.setMsg("添加图书类型成功！");
         }catch (Exception ex){
-            resultData.setCode(ConstantUtils.ERROR_CODE);
-            resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
-            resultData.setMsg("添加图书类型失败！");
-            ExceptionConstantsUtils.printErrorMessage(log,ex,"添加图书异常");
+            //resultData.setCode(ConstantUtils.ERROR_CODE);
+            //resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
+            //resultData.setMsg("添加图书类型失败！");
+            return ExceptionConstantsUtils.printErrorMessage(log,ex,"添加图书异常");
         }
-        return resultData;
+        return ExceptionConstantsUtils.printSuccessMessage(log,"添加图书类型成功！");
     }
 
     /**

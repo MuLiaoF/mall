@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * 异常枚举类
- * @author baijiao 20200606
+ * @author 20200606
  */
 public enum ErrorCodesEnum {
     /************操作成功**************/
@@ -97,7 +97,6 @@ public enum ErrorCodesEnum {
     PAY_MDCODE_MEMBER_ERROR(40005, "会员支付码对应会员不存在"),
     PAY_MEMCODE_PAYCODE_NOT_PAIR(40006, "会员付款码与输入会员卡号不一致"),
     PAY_MEMBER_MICROPAY_FAIL(40007, "会员付款码支付失败"),
-    PAY_WD_SYSTEM_FAIL(40008, "调万鼎支付系统支付失败"),
     PAY_CASH_FAIL(40009, "现金支付失败"),
     PAY_TRANSACTION_FAILURES_ERROR(40007, "支付交易失败"),
     PAY_MDCODE_INVALID(40008, "会员支付码无效"),

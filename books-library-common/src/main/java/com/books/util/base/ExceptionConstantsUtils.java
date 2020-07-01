@@ -18,7 +18,7 @@ public class ExceptionConstantsUtils {
      * @param e
      */
     @SuppressWarnings("rawtypes")
-	public static ResultData printErrorMessage(Logger log, String code, String printMsg) {
+	public static ResultData printErrorMessage(Logger log, Integer code, String printMsg) {
         log.info(printMsg);
         return ConstantUtils.printMessage(code, ConstantUtils.ERROR_MESSAGE, printMsg,null);
     }

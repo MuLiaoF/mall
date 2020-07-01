@@ -8,17 +8,17 @@ package com.books.util.base;
 */
 public class ConstantUtils {
 	
-    public static final String SUCCESS_CODE = "200";  // 成功
+    public static final Integer SUCCESS_CODE = 200;
 
-    public static final String ERROR_CODE = "10000";  // 失败
-    
+    public static final Integer ERROR_CODE = 10000;  // 失败
+
     public static final String isDel = "1";     // 删除
-    
+
     public static final String isNotDel = "0";  // 存在
-    
-    public static final String isOff = "1";     // 0 下架  
-    
-    public static final String isPut = "0";     // 0 上架 
+
+    public static final String isOff = "1";     // 0 下架
+
+    public static final String isPut = "0";     // 0 上架
 
     public static final Boolean SUCCESS_MESSAGE = true;
 
@@ -30,7 +30,7 @@ public class ConstantUtils {
 
 
 
-    public static <T> ResultData<T> printMessage(String code,Boolean codeMsg, String msg, T data) {
+    public static <T> ResultData<T> printMessage(Integer code,Boolean codeMsg, String msg, T data) {
         ResultData<T> resultData = new ResultData<>();
         resultData.setCode(code);
         resultData.setMsg(msg);
@@ -38,6 +38,11 @@ public class ConstantUtils {
         resultData.setObj(data);
         return resultData;
     }
+
+    public static <T> ResultData<T> printSuccessMessage(Integer code, String message, T data) {
+        return printMessage(code, SUCCESS_MESSAGE, message, data);
+    }
+
 
     public static <T> ResultData<T> printSuccessMessage(String message, T data) {
         return printMessage(SUCCESS_CODE, SUCCESS_MESSAGE, message, data);
