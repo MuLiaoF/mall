@@ -1,12 +1,11 @@
 package com.books.token.service.impl;
 
+import com.books.token.dao.ComVerTicMapper;
+import com.books.token.entity.ComVerTic;
+import com.books.token.service.ComVerTicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.weupay.member.token.dao.ComVerTicMapper;
-import com.weupay.member.token.entity.ComVerTic;
-import com.weupay.member.token.service.ComVerTicService;
 
 @Service
 public class ComVerTicServiceImpl implements ComVerTicService {

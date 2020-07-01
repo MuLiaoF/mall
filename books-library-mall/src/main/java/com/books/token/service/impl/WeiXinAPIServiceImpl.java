@@ -1,21 +1,11 @@
 package com.books.token.service.impl;
 
-import org.springframework.stereotype.Service;
-
 import com.alibaba.fastjson.JSONObject;
-import com.weupay.member.token.consts.WeiXinOpenConsts;
-import com.weupay.member.token.service.WeiXinAPIService;
-import com.weupay.member.token.util.HttpClientUtils;
-import com.weupay.member.token.weixin.open.model.AuthorizationQueryReq;
-import com.weupay.member.token.weixin.open.model.AuthorizationQueryRes;
-import com.weupay.member.token.weixin.open.model.CreatePreCodeReq;
-import com.weupay.member.token.weixin.open.model.CreatePreCodeRes;
-import com.weupay.member.token.weixin.open.model.GetAuthorizerInfoReq;
-import com.weupay.member.token.weixin.open.model.GetAuthorizerInfoRes;
-import com.weupay.member.token.weixin.open.model.ReqAuthorizerRefreshToken;
-import com.weupay.member.token.weixin.open.model.ReqComponentAccessToken;
-import com.weupay.member.token.weixin.open.model.ResAuthorizerRefreshToken;
-import com.weupay.member.token.weixin.open.model.ResComponentAccessToken;
+import com.books.token.consts.WeiXinOpenConsts;
+import com.books.token.service.WeiXinAPIService;
+import com.books.token.util.HttpClientUtils;
+import com.books.token.weixin.open.model.*;
+import org.springframework.stereotype.Service;
 
 @Service
 public class WeiXinAPIServiceImpl implements WeiXinAPIService {
@@ -30,7 +20,7 @@ public class WeiXinAPIServiceImpl implements WeiXinAPIService {
 
 	@Override
 	public ResAuthorizerRefreshToken getMpAccessToken(String component_access_token,
-			ReqAuthorizerRefreshToken authorizerRefreshToken) {
+													  ReqAuthorizerRefreshToken authorizerRefreshToken) {
 		String responseStr = HttpClientUtils.sendPost(
 				String.format(WeiXinOpenConsts.AUTHORIZER_REFRESH_TOKEN_URL, component_access_token),
 				authorizerRefreshToken);

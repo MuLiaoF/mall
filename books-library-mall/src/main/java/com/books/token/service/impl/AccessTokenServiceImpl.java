@@ -1,14 +1,13 @@
 package com.books.token.service.impl;
 
-import java.util.List;
-
+import com.books.entity.token.AccessToken;
+import com.books.token.dao.AccessTokenMapper;
+import com.books.token.service.AccessTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.weupay.member.token.dao.AccessTokenMapper;
-import com.weupay.member.token.entity.AccessToken;
-import com.weupay.member.token.service.AccessTokenService;
+import java.util.List;
 
 @Service
 public class AccessTokenServiceImpl implements AccessTokenService {
@@ -24,21 +23,21 @@ public class AccessTokenServiceImpl implements AccessTokenService {
 
 	@Transactional(rollbackFor = Exception.class, readOnly = true)
 	@Override
-	public List<com.weupay.member.token.weixin.common.bean.AccessToken> selectAll() {
+	public List<AccessToken> selectAll() {
 		return accessTokenMapper.selectAll();
 	}
 
 	@Transactional(rollbackFor = Exception.class, readOnly = true)
 	@Override
-	public List<com.weupay.member.token.weixin.common.bean.AccessToken> selectWithExpiresTime(Long expiresTime) {
+	public List<AccessToken> selectWithExpiresTime(Long expiresTime) {
 		return accessTokenMapper.selectWithExpiresTime(expiresTime);
 	}
 
 	@Transactional(rollbackFor = Exception.class, readOnly = false)
 	@Override
-	public int batchUpdateWithId(List<com.weupay.member.token.weixin.common.bean.AccessToken> accessTokenCaches) {
+	public int batchUpdateWithId(List<AccessToken> accessTokenCaches) {
 		int count = 0;
-		for (com.weupay.member.token.weixin.common.bean.AccessToken accessTokenCache : accessTokenCaches) {
+		for (AccessToken accessTokenCache : accessTokenCaches) {
 			count += accessTokenMapper.updateWithId(accessTokenCache);
 		}
 		return count;

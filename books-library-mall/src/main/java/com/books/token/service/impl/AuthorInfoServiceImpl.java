@@ -1,21 +1,20 @@
 package com.books.token.service.impl;
 
-import java.util.Map;
-
+import com.books.token.dao.AuthorInfoMapper;
+import com.books.token.entity.AuthorInfo;
+import com.books.token.service.AuthorInfoServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.weupay.member.token.dao.AuthorInfoMapper;
-import com.weupay.member.token.entity.AuthorInfo;
-import com.weupay.member.token.service.AuthorInfoServiceI;
+import java.util.Map;
 
 @Transactional(rollbackFor = Exception.class)
 @Service("authorInfoService")
-public class AuthorInfoServiceImpl implements AuthorInfoServiceI{
+public class AuthorInfoServiceImpl implements AuthorInfoServiceI {
 	
 	@Autowired
-	private AuthorInfoMapper  authorInfoMapper;
+	private AuthorInfoMapper authorInfoMapper;
 	@Override
 	public int insert(AuthorInfo record) {
 		
