@@ -1,6 +1,9 @@
 package com.books.util.token;
 
 import lombok.Data;
+
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @authorff
  * @title: TokenEntity

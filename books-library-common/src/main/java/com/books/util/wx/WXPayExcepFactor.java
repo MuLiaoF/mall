@@ -1,6 +1,7 @@
 package com.books.util.wx;
 
-import cn.wandingkeji.common.http.HttpStatus;
+import com.books.util.exception.ExcepFactor;
+import org.springframework.http.HttpStatus;
 
 /**
  * Created by xiexiaoxiao on 16/6/24.
