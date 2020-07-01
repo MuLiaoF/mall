@@ -1,6 +1,7 @@
 package com.books.util.exception;
 
-import cn.wandingkeji.common.enums.ErrorCodesEnum;
+
+import com.books.util.enums.ErrorCodesEnum;
 
 public class BussinessException extends RuntimeException{
 
