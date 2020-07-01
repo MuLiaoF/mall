@@ -2,25 +2,25 @@ package com.books.member.service.impl;
 
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.books.entity.member.MemMemberInfo;
 import com.books.entity.member.SysAuthUser;
 import com.books.entity.token.SysAccessToken;
-import com.books.mapper.AuthUserMapper;
-import com.books.member.controller.AuthUserController;
 import com.books.member.mapper.AuthUserMapper;
+import com.books.member.mapper.MemMemberInfoMapper;
 import com.books.member.service.IAuthUserService;
 import com.books.request.member.InitMemMiniFansReq;
 import com.books.request.member.MemMiniFansReq;
 import com.books.response.member.AuthUserRes;
 import com.books.response.member.MemAndFansRsp;
+import com.books.response.token.TokenRes;
+import com.books.system.mapper.SysAccessTokenMapper;
 import com.books.util.enums.ErrorCodesEnum;
 import com.books.util.exception.BussinessException;
+import com.books.util.token.JWTToken;
 import com.books.util.token.TokenEntity;
 import com.books.util.wx.AesException;
 import com.books.util.wx.WXMiniBizMsgCrypt;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +47,8 @@ public class AuthUserServiceImpl implements IAuthUserService {
     @Autowired
     private MemMemberInfoMapper memMemberInfoMapper;
 
+    @Autowired
+    private SysAccessTokenMapper systemBaseMapper;
     /**
      * wx.login 调用获取用户信息
      * @param memMiniFansReq
@@ -60,9 +62,9 @@ public class AuthUserServiceImpl implements IAuthUserService {
         String code = memMiniFansReq.getCode();
 
         TokenRes tokenRes = new TokenRes();
-        tokenRes.setTokenUrl(tokenUrl);
-        tokenRes.setTokenType(5);
-        SysAccessToken sysAccessToken = systemBaseApi.getMidByAppId(appid);
+        //tokenRes.setTokenUrl(tokenUrl);
+        //tokenRes.setTokenType(5);
+        SysAccessToken sysAccessToken = systemBaseMapper.getByAppId(appid);
         if(sysAccessToken == null && null == sysAccessToken.getThirdmid()) {
             throw new BussinessException(500 ,"APPID不存在");
         }
@@ -76,7 +78,7 @@ public class AuthUserServiceImpl implements IAuthUserService {
         //reqUrl += "&component_appid=" + openAppid + "&component_access_token=" + accessToken;
         log.info("returnRes-------->>>>>" + reqUrl);
 
-        String returnRes = HttpUtil.sendGET(reqUrl);
+        String returnRes = HttpUtil.get(reqUrl);
         log.info("code-------->>>>>" + code);
         log.info("returnRes-------->>>>>" + returnRes);
         return wxToken(returnRes, appid, sysAccessToken);
@@ -284,11 +286,11 @@ public class AuthUserServiceImpl implements IAuthUserService {
                 || authUser.getUnionid() == null || authUser.getMid() == null) {
             return null;
         }
-        SysAuthUser authSel = authUserMapper.selectOne(authUser);
+        SysAuthUser authSel = authUserMapper.selectOne(Wrappers.query(authUser));
         log.info("查询用户---->   ----" + authSel);
         if(authSel != null && authSel.getUserId() != null) {
 
-            MemMemberInfo  memMemberInfo = memberInfoMapper.getMemberInfoById(authSel.getUserId());
+            MemMemberInfo  memMemberInfo = memMemberInfoMapper.selectById(authSel.getUserId());
 
             log.info("查询----会员信息------>" + memMemberInfo);
             if(memMemberInfo != null) {
@@ -305,7 +307,7 @@ public class AuthUserServiceImpl implements IAuthUserService {
      * @param authUser 粉丝信息
      */
     private SysAuthUser checkMemFans(SysAuthUser authUser) throws Exception {
-        SysAuthUser authUserSel = authUserMapper.selectOne(authUser);
+        SysAuthUser authUserSel = authUserMapper.selectOne(Wrappers.query(authUser));
         //如果粉丝信息表中存在该粉丝
         if(authUserSel != null) {
             String sessionKey = authUser.getReserve1();
@@ -313,14 +315,14 @@ public class AuthUserServiceImpl implements IAuthUserService {
             if(sessionKey != null) {
                 log.info("-----粉丝信息-----base--更新SessionKey" + authUser);
                 authUserSel.setReserve1(sessionKey);
-                authUserMapper.updateUser(authUserSel);
+                authUserMapper.updateById(authUserSel);
             }
             return authUserSel;
         }
         log.info("-----粉丝信息-----base--插入" + authUser);
         //如果粉丝信息查询不到则插入
         authUser.setCreateTime(new Date());
-        int insert = authUserMapper.insertUser(authUser);
+        int insert = authUserMapper.insert(authUser);
         authUser.setId(insert);
         return authUser;
     }
