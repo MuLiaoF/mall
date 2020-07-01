@@ -17,9 +17,9 @@ import com.alibaba.druid.pool.DruidDataSource;
  * @author liaoxiang
  * @date 2018/05/09
  */
-@Configuration
-@PropertySources(value = { @PropertySource(value = "classpath:config/db/mysql-common.properties", encoding = "UTF-8"),
-		@PropertySource(value = "classpath:config/db/mysql-${spring.profiles.active}.properties", encoding = "UTF-8") })
+//@Configuration
+//@PropertySources(value = { @PropertySource(value = "classpath:config/db/mysql-common.properties", encoding = "UTF-8"),
+///		@PropertySource(value = "classpath:config/db/mysql-${spring.profiles.active}.properties", encoding = "UTF-8") })
 public class DatabaseConfig {
 
 	@Autowired

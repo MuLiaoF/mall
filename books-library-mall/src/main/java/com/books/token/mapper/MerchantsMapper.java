@@ -1,4 +1,4 @@
-package com.books.token.dao;
+package com.books.token.mapper;
 
 import com.books.token.entity.Merchants;
 import org.apache.ibatis.annotations.Param;

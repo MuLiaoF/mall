@@ -1,7 +1,7 @@
 package com.books.token.service.impl;
 
 import com.books.entity.token.AccessToken;
-import com.books.token.dao.AccessTokenMapper;
+import com.books.token.mapper.AccessTokenMapper;
 import com.books.token.service.AccessTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

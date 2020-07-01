@@ -1,6 +1,6 @@
 package com.books.token.service.impl;
 
-import com.books.token.dao.AuthorInfoMapper;
+import com.books.token.mapper.AuthorInfoMapper;
 import com.books.token.entity.AuthorInfo;
 import com.books.token.service.AuthorInfoServiceI;
 import org.springframework.beans.factory.annotation.Autowired;

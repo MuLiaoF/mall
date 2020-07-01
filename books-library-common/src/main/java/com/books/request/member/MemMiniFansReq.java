@@ -1,7 +1,8 @@
 package com.books.request.member;
 
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * 粉丝信息请求

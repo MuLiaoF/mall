@@ -1,6 +1,6 @@
 package com.books.token.service.impl;
 
-import com.books.token.dao.ComVerTicMapper;
+import com.books.token.mapper.ComVerTicMapper;
 import com.books.token.entity.ComVerTic;
 import com.books.token.service.ComVerTicService;
 import org.springframework.beans.factory.annotation.Autowired;

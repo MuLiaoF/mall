@@ -1,6 +1,6 @@
 package com.books.token.service.impl;
 
-import com.books.token.dao.MerchantsMapper;
+import com.books.token.mapper.MerchantsMapper;
 import com.books.token.entity.Merchants;
 import com.books.token.service.MerchantsServiceI;
 import org.springframework.beans.factory.annotation.Autowired;

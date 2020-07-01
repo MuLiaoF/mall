@@ -1,4 +1,4 @@
-package com.books.token.dao;
+package com.books.token.mapper;
 
 import java.util.List;
 
