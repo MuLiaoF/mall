@@ -35,8 +35,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.47</version>
-			<scope>runtime</scope>
+			<version>8.0.20</version>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -67,10 +66,14 @@
 			<artifactId>books-library-common</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+        <dependency>
+            <groupId>org.testng</groupId>
+            <artifactId>testng</artifactId>
+            <version>RELEASE</version>
+            <scope>test</scope>
+        </dependency>
 
-
-
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>

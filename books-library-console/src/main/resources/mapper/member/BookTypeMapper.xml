@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.bookManage.mapper.BookTypeMapper">
+    <!--如果存在当前ID返回1，不存在返回0-->
+    <select id="queryIdExists" parameterType="int" resultType="int">
+        SELECT DISTINCT IF(EXISTS(SELECT * FROM tbl_book_type WHERE id = #{id}),1,0) AS a FROM tbl_book_type
+    </select>
+    <!--添加一个图书类型-->
+    <insert id="addOneBookType" parameterType="com.books.entity.booktype.BookTypeBean">
+        INSERT INTO tbl_book_type VALUES (NULL,#{pid},#{typeName},#{isdel},#{status})
+    </insert>
+    <!--根据ID删除一条记录-->
+    <delete id="deleteBookTypeById" parameterType="int">
+        DELETE FROM tbl_book_type WHERE id = #{id}
+    </delete>
+    <!--根据类型名称删除记录-->
+    <delete id="deleteBookTypeByType" parameterType="string">
+        DELETE FROM tbl_book_type WHERE type_name = #{type_name}
+    </delete>
+    <!--根据记录名称查询是否有该条记录-->
+    <select id="queryTypeExists" parameterType="string" resultType="int">
+        SELECT DISTINCT IF(EXISTS(SELECT * FROM tbl_book_type WHERE type_name = #{type_name}),1,0) AS a FROM tbl_book_type
+    </select>
+    <!--根据ID查询-->
+    <select id="selectTypeById" parameterType="int" resultType="com.books.entity.booktype.BookTypeBean">
+        SELECT id,pid,type_name,isdel,status FROM tbl_book_type WHERE id = #{id}
+    </select>
+    <!--查询所有-->
+    <select id="selectTypeAll" resultType="com.books.entity.booktype.BookTypeBean">
+        SELECT id,pid,type_name,isdel,status FROM tbl_book_type
+    </select>
+</mapper>

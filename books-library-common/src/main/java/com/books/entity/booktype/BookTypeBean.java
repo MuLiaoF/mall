@@ -13,11 +13,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @TableName("tbl_book_type")
 public class BookTypeBean {
     @TableId(value = "id",type = IdType.AUTO)
-    private Integer id;
-    private Integer pid;
-    private String typeName;
-    private String isdel;
-    private String status;
+    private Integer id;         //ID
+    private Integer pid;        //父ID
+    private String typeName;    //图书类型名称
+    private String isdel;       //是否删除
+    private String status;      //状态
 
     public Integer getId() {
         return id;
