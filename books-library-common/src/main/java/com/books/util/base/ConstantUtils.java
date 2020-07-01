@@ -8,12 +8,17 @@ package com.books.util.base;
 */
 public class ConstantUtils {
 	
-    public static final String SUCCESS_CODE = "200";
+    public static final String SUCCESS_CODE = "200";  // 成功
 
-    public static final String ERROR_CODE = "10000";
+    public static final String ERROR_CODE = "10000";  // 失败
     
-    public static final String isDel = "1";     // 0 存在 1 删除
-    public static final String isNotDel = "0";  // 0 存在 1 删除
+    public static final String isDel = "1";     // 删除
+    
+    public static final String isNotDel = "0";  // 存在
+    
+    public static final String isOff = "1";     // 0 下架  
+    
+    public static final String isPut = "0";     // 0 上架 
 
     public static final Boolean SUCCESS_MESSAGE = true;
 
