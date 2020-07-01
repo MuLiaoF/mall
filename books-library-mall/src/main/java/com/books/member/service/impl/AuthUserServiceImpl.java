@@ -21,6 +21,7 @@ import com.books.util.token.JWTToken;
 import com.books.util.token.TokenEntity;
 import com.books.util.wx.AesException;
 import com.books.util.wx.WXMiniBizMsgCrypt;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +38,8 @@ import java.util.Date;
  * @date 2020/7/1 11:57
  */
 @Service
+@Slf4j
 public class AuthUserServiceImpl implements IAuthUserService {
-
-    private static final Logger log = LogManager.getLogger(AuthUserServiceImpl.class);
 
     @Autowired
     private AuthUserMapper authUserMapper;

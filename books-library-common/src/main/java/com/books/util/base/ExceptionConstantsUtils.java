@@ -1,7 +1,7 @@
 package com.books.util.base;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
 
 /**
 * @author Zhao yongbing

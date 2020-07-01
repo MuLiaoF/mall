@@ -36,7 +36,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
     <select id="getByAppId" resultMap="SysAccessTokenResult">
-        select thirdmid,app_secret from sys_access_token where appid=#{appid}
+        select thirdmid,app_secret from tbl_access_token where appid=#{appid}
     </select>
 
 </mapper>

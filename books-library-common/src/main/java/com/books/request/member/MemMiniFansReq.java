@@ -11,8 +11,6 @@ import javax.validation.constraints.NotNull;
 @Data
 public class MemMiniFansReq {
 
-    @NotNull
-    private Integer mid;
 
     @NotNull
     private String code;

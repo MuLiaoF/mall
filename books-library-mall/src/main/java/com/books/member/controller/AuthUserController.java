@@ -9,11 +9,12 @@ import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
 import com.books.util.token.TokenEntity;
 import com.books.util.token.TokenUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -24,13 +25,12 @@ import javax.servlet.http.HttpServletRequest;
  * @date 2020/7/1 11:57
  */
 @RestController
+@Slf4j
 public class AuthUserController {
 
     @Autowired
     private IAuthUserService authUserService;
 
-
-    private static final Logger log = LogManager.getLogger(AuthUserController.class);
 
     /**
      * 初始化粉丝信息获取openID
