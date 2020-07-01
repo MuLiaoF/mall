@@ -2,6 +2,9 @@ package com.books.bookManage.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.books.entity.booktype.BookTypeBean;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * @Auther Wang zhe
@@ -42,4 +45,22 @@ public interface BookTypeMapper extends BaseMapper<BookTypeBean> {
      */
     int queryTypeExists(String type_name);
 
+    /**
+     * 根据ID查询一条记录
+     * @param id ID
+     * @return 一个图书类型记录
+     */
+    BookTypeBean selectTypeById(int id);
+
+    /**
+     * 查询所有记录
+     * @return
+     */
+    List<BookTypeBean> selectTypeAll();
+
+    /**
+     * 根据ID修改信息
+     * @param bookTypeBean 图书类型
+     */
+    void updateTypeById(BookTypeBean bookTypeBean);
 }

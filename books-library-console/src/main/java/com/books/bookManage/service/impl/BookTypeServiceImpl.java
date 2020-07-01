@@ -78,4 +78,41 @@ public class BookTypeServiceImpl implements IBookTypeService {
         resultData.setMsg("删除成功");
         return resultData;
     }
+
+    /**
+     * 根据ID查询一条记录
+     * @param id ID
+     * @return
+     */
+    @Override
+    public ResultData<Object> selectTypeById(int id) {
+        ResultData<Object> resultData = new ResultData<>();
+        //不存在ID
+        if (mapper.queryIdExists(id)==0){
+            resultData.setCode(ConstantUtils.ERROR_CODE);
+            resultData.setSuccess(ConstantUtils.ERROR_MESSAGE);
+            resultData.setMsg("不存在该条记录");
+            log.info(ExceptionConstantsUtils.printErrorMessage(log,"不存在id为"+id+"的记录"));
+            return resultData;
+        }
+        resultData.setCode(ConstantUtils.SUCCESS_CODE);
+        resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
+        resultData.setMsg("查询成功");
+        resultData.setObj(mapper.selectTypeById(id));
+        return resultData;
+    }
+
+    /**
+     * 查询所有记录
+     * @return
+     */
+    @Override
+    public ResultData<Object> selectTypeAll() {
+        ResultData<Object> resultData = new ResultData<>();
+        resultData.setCode(ConstantUtils.SUCCESS_CODE);
+        resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
+        resultData.setMsg("查询成功");
+        resultData.setObj(mapper.selectTypeAll());
+        return resultData;
+    }
 }
