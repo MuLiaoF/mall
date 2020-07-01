@@ -26,4 +26,16 @@ public interface IBookTypeService {
      * @param type_name 图书类型名称
      */
     ResultData<String> deleteBookTypeByType(String type_name);
+
+    /**
+     * 根据ID查询一条记录
+     * @param id ID
+     */
+    ResultData<Object> selectTypeById(int id);
+
+    /**
+     * 查询所有记录
+     * @return
+     */
+    ResultData<Object> selectTypeAll();
 }
