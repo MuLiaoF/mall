@@ -2,9 +2,6 @@ package com.books.bookManage.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -14,9 +11,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.books.bookManage.service.IBookManageService;
 import com.books.entity.bookinfo.BookInfoBean;
-import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
 * @author Zhao yongbing
@@ -51,16 +49,8 @@ public class BookInfoController {
 		ResultData<String> result=null;
 		try {
 			result = service.uploadBookInfo(bookInfo,files,defaultFile);
-			result.setCode(ConstantUtils.SUCCESS_CODE);
-			result.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-			result.setMsg("上传成功！");
 		} catch (Exception e) {
-			result.setCode(ConstantUtils.ERROR_CODE);
-			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
-			result.setMsg("写入文件异常！！！");
-			ExceptionConstantsUtils.printErrorMessage(log, e ,"写入文件异常！！！");
-			e.printStackTrace();
-			return result;
+			return ExceptionConstantsUtils.printErrorMessage(log, e ,"写入文件异常！！！");
 		}
 		return result;
 		

@@ -4,9 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import lombok.extern.slf4j.Slf4j;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +16,8 @@ import com.books.entity.goodsInfo.GoodsStockNumberBean;
 import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+
+import lombok.extern.slf4j.Slf4j;
 
 /**
 * @author Zhao yongbing
@@ -47,12 +46,9 @@ public class GoodsManageController {
 		try {
 			result = service.findGoodsInfoList(goodsInfoBean);
 		} catch (Exception e) {
-			result.setCode(ConstantUtils.ERROR_CODE);
-			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
-			result.setMsg("商品查询失败！");
-			ExceptionConstantsUtils.printErrorMessage(log, e, "商品查询失败！");
+			return ExceptionConstantsUtils.printErrorMessage(log, e, "商品查询失败！");
 		}
-		return ExceptionConstantsUtils.printSuccessMessage(log,"商品查询失败！", result);
+		return result;
 		
 	} 
 	/**
@@ -69,10 +65,7 @@ public class GoodsManageController {
 		try {
 			result = service.addOrupdateGoodsInfo(goodsInfoBean,goodsStockNumberBean);
 		} catch (Exception e) {
-			result.setCode(ConstantUtils.ERROR_CODE);
-			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
-			result.setMsg("商品编辑失败！");
-			ExceptionConstantsUtils.printErrorMessage(log,e,"商品编辑失败！");
+			return ExceptionConstantsUtils.printErrorMessage(log,e,"商品编辑失败！");
 		}
 		return result;
 		
@@ -91,16 +84,11 @@ public class GoodsManageController {
 		try {
 			result = service.putOrOffGoods(goodsInfoBean);
 		} catch (Exception e) {
-			result.setCode(ConstantUtils.ERROR_CODE);
-			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
 			if(ConstantUtils.isPut.equals(goodsInfoBean.getIsOff())) {
-				result.setMsg("商品上架失败!");
 				ExceptionConstantsUtils.printErrorMessage(log,e,"商品上架失败！");
 			}else {
-				result.setMsg("商品下架失败!");
 				ExceptionConstantsUtils.printErrorMessage(log,e,"商品下架失败！");
 			}
-			
 		}
 		return result;
 		

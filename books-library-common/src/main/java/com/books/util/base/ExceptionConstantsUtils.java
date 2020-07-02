@@ -17,8 +17,7 @@ public class ExceptionConstantsUtils {
      * @param log
      * @param e
      */
-    @SuppressWarnings("rawtypes")
-	public static ResultData printErrorMessage(Logger log, Integer code, String printMsg) {
+	public static <T> ResultData<T> printErrorMessage(Logger log, Integer code, String printMsg) {
         log.info(printMsg);
         return ConstantUtils.printMessage(code, ConstantUtils.ERROR_MESSAGE, printMsg,null);
     }
@@ -29,8 +28,7 @@ public class ExceptionConstantsUtils {
      * @param log
      * @param e
      */
-    @SuppressWarnings("rawtypes")
-	public static ResultData printErrorMessage(Logger log, Exception e, String printMsg) {
+	public static <T> ResultData<T> printErrorMessage(Logger log, Exception e, String printMsg) {
         String message = ExceptionUtils.getStackTrace(e);
         log.info(printMsg);
         log.info(message);
@@ -40,8 +38,7 @@ public class ExceptionConstantsUtils {
         return ConstantUtils.printErrorMessage(printMsg);
     }
 
-    @SuppressWarnings("rawtypes")
-	public static ResultData printErrorMessage(Logger log, String printMsg) {
+	public static <T> ResultData<T> printErrorMessage(Logger log, String printMsg) {
         log.info(printMsg);
         if(printMsg == null) {
             return ConstantUtils.printErrorMessage();
@@ -49,8 +46,7 @@ public class ExceptionConstantsUtils {
         return ConstantUtils.printErrorMessage(printMsg);
     }
 
-    @SuppressWarnings("rawtypes")
-	public static ResultData printSuccessMessage(Logger log, String printMsg) {
+	public static <T> ResultData<T> printSuccessMessage(Logger log, String printMsg) {
         log.info(printMsg);
         if(printMsg == null) {
             return ConstantUtils.printErrorMessage();
@@ -58,8 +54,7 @@ public class ExceptionConstantsUtils {
         return ConstantUtils.printSuccessMessage(printMsg, null);
     }
 
-    @SuppressWarnings("rawtypes")
-	public static <T> ResultData printSuccessMessage(Logger log, String printMsg , T data) {
+	public static <T> ResultData<T> printSuccessMessage(Logger log, String printMsg , T data) {
         log.info(printMsg);
         if(printMsg == null) {
             return ConstantUtils.printErrorMessage();

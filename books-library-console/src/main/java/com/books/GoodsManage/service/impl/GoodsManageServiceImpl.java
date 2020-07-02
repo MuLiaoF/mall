@@ -6,18 +6,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.baomidou.mybatisplus.extension.toolkit.PackageHelper;
 import com.books.GoodsManage.mapper.GoodsInfoMapper;
 import com.books.GoodsManage.mapper.GoodsStockNumberMapper;
 import com.books.GoodsManage.service.IGoodsManageService;
 import com.books.entity.goodsInfo.GoodsInfoBean;
 import com.books.entity.goodsInfo.GoodsStockNumberBean;
 import com.books.util.base.ConstantUtils;
+import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
 
 import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.NumberUtil;
-import cn.hutool.core.util.StrUtil;
+import lombok.extern.slf4j.Slf4j;
 
 /**
 * @author Zhao yongbing
@@ -26,6 +25,7 @@ import cn.hutool.core.util.StrUtil;
 * @Description 类描述
 */
 @Service
+@Slf4j
 public class GoodsManageServiceImpl implements IGoodsManageService {
 
 	@Autowired
@@ -37,16 +37,18 @@ public class GoodsManageServiceImpl implements IGoodsManageService {
 	@Override
 	public ResultData<String> addOrupdateGoodsInfo(GoodsInfoBean goodsInfoBean,GoodsStockNumberBean goodsStockNumberBean) throws Exception{
 		
-		ResultData<String> result=new ResultData<String>();
+		String printMsg = "";
 		
 		// 修改
 		if(goodsInfoBean.getId() != null) {
 			goodsInfoMapper.updateById(goodsInfoBean);
 			goodsStockNumberBean.setGoodsId(goodsInfoBean.getId());
+			if(goodsStockNumberBean.getStockNumber() == null) {
+				// 删除
+				goodsStockNumberBean.setIsdel(ConstantUtils.isDel);
+			}
 			goodsStockNumberMapper.updateById(goodsStockNumberBean);  // 保存库存数
-			result.setCode(ConstantUtils.SUCCESS_CODE);
-			result.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-			result.setMsg("商品修改成功!");
+			printMsg = "商品修改成功!";
 		}else {
 			// 新增
 			goodsInfoBean.setIsdel(ConstantUtils.isNotDel);
@@ -62,45 +64,35 @@ public class GoodsManageServiceImpl implements IGoodsManageService {
 			goodsStockNumberBean.setIsdel(ConstantUtils.isNotDel);
 			goodsStockNumberMapper.insert(goodsStockNumberBean);  // 保存库存数
 			
-			result.setCode(ConstantUtils.SUCCESS_CODE);
-			result.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-			result.setMsg("商品添加成功!");
+			printMsg = "商品添加成功!!";
 		}
-		return result;
+		return ExceptionConstantsUtils.printSuccessMessage(log, printMsg);
 	}
 
 	
 	@Override
 	public ResultData<String> putOrOffGoods(GoodsInfoBean goodsInfoBean) throws Exception {
-		ResultData<String> result=new ResultData<String>();
-		
+		String printMsg = "";
 		if(ConstantUtils.isPut.equals(goodsInfoBean.getIsOff())) {
 			goodsInfoBean.setOffDate(DateUtil.date());
 			goodsInfoBean.setIsOff(null);
-			result.setMsg("商品上架成功!");
+			printMsg = "商品上架成功!";
 		}else {
 			goodsInfoBean.setOffDate(DateUtil.date());
-			result.setMsg("商品下架成功!");
+			printMsg = "商品下架成功!";
 		}
-		
 		goodsInfoMapper.updateById(goodsInfoBean);
 		
-		result.setCode(ConstantUtils.SUCCESS_CODE);
-		result.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-		return result;
+		return ExceptionConstantsUtils.printSuccessMessage(log, printMsg);
 	}
 
 
 	@Override
 	public ResultData<List<GoodsInfoBean>> findGoodsInfoList(GoodsInfoBean goodsInfoBean) {
-		ResultData<List<GoodsInfoBean>> result = new ResultData<List<GoodsInfoBean>>();
 		
 		List<GoodsInfoBean> list  = goodsInfoMapper.findGoodsInfoList(goodsInfoBean);
-		result.setObj(list);
-		result.setCode(ConstantUtils.SUCCESS_CODE);
-		result.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
-		result.setMsg("商品查询成功!");
-		return result;
+		
+		return ExceptionConstantsUtils.printSuccessMessage(log,"商品查询成功", list);
 	}
 
 }

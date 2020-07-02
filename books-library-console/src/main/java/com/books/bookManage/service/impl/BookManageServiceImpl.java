@@ -19,6 +19,7 @@ import com.books.bookManage.mapper.BookInfoTypeMapper;
 import com.books.bookManage.service.IBookManageService;
 import com.books.entity.bookinfo.BookInfoBean;
 import com.books.util.base.ConstantUtils;
+import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
 
 import cn.hutool.core.date.DateUtil;
@@ -52,15 +53,11 @@ public class BookManageServiceImpl implements IBookManageService{
 	@Transactional
 	@Override
 	public ResultData<String> uploadBookInfo(BookInfoBean bookInfo, MultipartFile[] files, MultipartFile defaultFile) throws Exception {
-		ResultData<String> result =new ResultData<String>();
 		HashMap<String,List<String>> otherImagMap = new HashMap<String,List<String>>();
 		List<String> list = new ArrayList<String>();
 		// 判断文件是否为空，空则返回失败页面
 		if (files.length <= 0 || defaultFile == null) {
-			result.setCode(ConstantUtils.ERROR_CODE);
-			result.setSuccess(ConstantUtils.ERROR_MESSAGE);
-			result.setMsg("文件为空，请重新上传");
-			return result;
+			return ExceptionConstantsUtils.printErrorMessage(log, "文件为空，请重新上传");
 		}
 		for (MultipartFile file : files) {
 			// 获取文件存储路径（绝对路径）
@@ -119,7 +116,7 @@ public class BookManageServiceImpl implements IBookManageService{
 		bookInfoTypeMapper.addBookInfoType(bookInfo);
 		// insert to 图书标签关系表
 		bookInfoLabelMapper.addBookInfoLabel(bookInfo);
-		return result;
+		return ExceptionConstantsUtils.printSuccessMessage(log, "上传成功");
 	}
 
 	
