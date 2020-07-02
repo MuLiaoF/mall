@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.books.GoodsManage.service.IGoodsManageService;
@@ -16,6 +17,7 @@ import com.books.entity.goodsInfo.GoodsStockNumberBean;
 import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,16 +37,21 @@ public class GoodsManageController {
 
 	/**
 	 * 查询商品信息
+	 * @param pageNum 
+	 * @param pageSize
 	 * @param goodsInfoBean
 	 * @param req
 	 * @return
 	 */
 	@RequestMapping(value = "/findGoodsInfoList", method = RequestMethod.POST)
 	@ResponseBody
-	public ResultData<List<GoodsInfoBean>> addOrupdateGoodsInfo(GoodsInfoBean goodsInfoBean,HttpServletRequest req) {
-		ResultData<List<GoodsInfoBean>> result=null;
+	public ResultData<PageInfo<GoodsInfoBean>> addOrupdateGoodsInfo(
+			@RequestParam(required = false,defaultValue = "1")Integer pageNum,
+			@RequestParam(required = false,defaultValue = "20")Integer pageSize,
+			GoodsInfoBean goodsInfoBean,HttpServletRequest req) {
+		ResultData<PageInfo<GoodsInfoBean>> result=null;
 		try {
-			result = service.findGoodsInfoList(goodsInfoBean);
+			result = service.findGoodsInfoList(goodsInfoBean, pageNum, pageSize);
 		} catch (Exception e) {
 			return ExceptionConstantsUtils.printErrorMessage(log, e, "商品查询失败！");
 		}

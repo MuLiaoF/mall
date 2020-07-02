@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.bookManage.mapper.BookInfoMapper">
-   
-
+	
+<!-- 添加图书-类型-关系 -->
 <insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
 
 	insert into tbl_book_info_type (id,type_id,book_info_id,isdel,create_time) values
@@ -11,7 +11,52 @@
 	</foreach>
 
 </insert>
-   
+
+<!-- 查询图书list -->
+<select id="findBookInfoList"  resultMap="BaseResultMap">
+
+		SELECT
+		  b.id,
+		  b.book_name,
+		  b.author,
+		  b.publisher,
+		  b.img_url_json,
+		  b.default_img_url,
+		  b.create_time,
+		  b.update_time,
+		  b.isdel,
+		  ty.id t_id,
+		  ty.pid t_pid,
+		  ty.type_name t_type_name
+	FROM
+		tbl_book_info b
+		LEFT JOIN tbl_book_info_type t ON b.id = t.book_info_id
+		LEFT JOIN tbl_book_type ty ON ty.id = t.type_id
+</select>
 
 
+	<resultMap id="BaseResultMap" type="com.books.bookManage.mapper.BookInfoMapper">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+	    <result column="author" property="author" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="DATE" />
+	    <result column="update_time" property="updateTime" jdbcType="DATE" />
+	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    
+<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
+<!-- 			<id column="t_id" property="id"/> -->
+<!-- 		    <result column="t_pid" property="pid"/> -->
+<!-- 		    <result column="t_type_name" property="typeName"/> -->
+<!-- 	   </collection> -->
+	</resultMap>
+
+
+<select id="getBookTypeById" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">
+	SELECT ty.id,ty.pid,ty.type_name typeName,ty.status from tbl_book_info_type t
+	LEFT JOIN tbl_book_type ty on t.type_id = ty.id
+	WHERE t.book_info_id = #{id}
+</select>
 </mapper>

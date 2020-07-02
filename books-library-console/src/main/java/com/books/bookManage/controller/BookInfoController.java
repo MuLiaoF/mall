@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -13,6 +15,7 @@ import com.books.bookManage.service.IBookManageService;
 import com.books.entity.bookinfo.BookInfoBean;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,7 +30,6 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping("/bookInfoController")
 @Slf4j
 public class BookInfoController {
-
 	
 	@Autowired
 	private IBookManageService service;
@@ -38,12 +40,12 @@ public class BookInfoController {
 	public String otherImgUrl;
 
 	/**
-	 * 
+	 * 上传图书信息
 	 * @param bookInfo
 	 * @param files 图片文件
 	 * @param defaultFile 默认图片文件
 	 */
-	@RequestMapping("/uploadBookInfo")
+	@RequestMapping(value = "/uploadBookInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public ResultData<String> uploadBookInfo(BookInfoBean bookInfo,MultipartFile[] files,MultipartFile defaultFile,HttpServletRequest req) {
 		ResultData<String> result=null;
@@ -51,6 +53,28 @@ public class BookInfoController {
 			result = service.uploadBookInfo(bookInfo,files,defaultFile);
 		} catch (Exception e) {
 			return ExceptionConstantsUtils.printErrorMessage(log, e ,"写入文件异常！！！");
+		}
+		return result;
+		
+	}
+	/**
+	 * 查询图书信息
+	 * @param pageNum
+	 * @param pageSize
+	 * @param bookInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/findBookInfoList", method = RequestMethod.POST)
+	@ResponseBody
+	public ResultData<PageInfo<BookInfoBean>> findBookInfoList(
+			@RequestParam(required = false,defaultValue = "1")Integer pageNum,
+			@RequestParam(required = false,defaultValue = "20")Integer pageSize,
+			BookInfoBean bookInfo) {
+		ResultData<PageInfo<BookInfoBean>> result=null;
+		try {
+			result = service.findBookInfoList(bookInfo,pageNum,pageSize);
+		} catch (Exception e) {
+			return ExceptionConstantsUtils.printErrorMessage(log, e ,"查询失败！！！");
 		}
 		return result;
 		

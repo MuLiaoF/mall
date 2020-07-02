@@ -21,6 +21,8 @@ import com.books.entity.bookinfo.BookInfoBean;
 import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.FileUtil;
@@ -117,6 +119,14 @@ public class BookManageServiceImpl implements IBookManageService{
 		// insert to 图书标签关系表
 		bookInfoLabelMapper.addBookInfoLabel(bookInfo);
 		return ExceptionConstantsUtils.printSuccessMessage(log, "上传成功");
+	}
+
+	@Override
+	public ResultData<PageInfo<BookInfoBean>> findBookInfoList(BookInfoBean bookInfo, Integer pageNum,
+			Integer pageSize) {
+		//PageHelper.startPage(pageNum, pageSize);
+		List<BookInfoBean> list = mapper.findBookInfoList(bookInfo);
+		return ExceptionConstantsUtils.printSuccessMessage(log, "查询图书信息成功", new PageInfo<BookInfoBean>(list));
 	}
 
 	

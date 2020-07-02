@@ -1,11 +1,13 @@
 package com.books.entity.bookinfo;
 
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.books.entity.booktype.BookTypeBean;
 
 /**
 * @author Zhao yongbing
@@ -41,6 +43,9 @@ public class BookInfoBean {
     
     @TableField(exist = false)
     private Integer[] labelIds;
+    
+    @TableField(exist = false)
+    private List<BookTypeBean> bookTypeBean;
     
     public Integer getId() {
         return id;
@@ -129,6 +134,16 @@ public class BookInfoBean {
 	public void setLabelIds(Integer[] labelIds) {
 		this.labelIds = labelIds;
 	}
+
+	public List<BookTypeBean> getBookTypeBean() {
+		return bookTypeBean;
+	}
+
+	public void setBookTypeBean(List<BookTypeBean> bookTypeBean) {
+		this.bookTypeBean = bookTypeBean;
+	}
+
+
 
 	
     

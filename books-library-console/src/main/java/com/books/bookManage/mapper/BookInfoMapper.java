@@ -1,7 +1,10 @@
 package com.books.bookManage.mapper;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.books.entity.bookinfo.BookInfoBean;
+import com.books.entity.booktype.BookTypeBean;
 
 /**
 * @author Zhao yongbing
@@ -13,5 +16,13 @@ import com.books.entity.bookinfo.BookInfoBean;
 
 public interface BookInfoMapper  extends BaseMapper<BookInfoBean>{
 
+	/**
+	 * 查询图书信息list
+	 * @param bookInfo
+	 * @return
+	 */
+	List<BookInfoBean> findBookInfoList(BookInfoBean bookInfo);
+	
+	List<BookTypeBean> getBookTypeById(Integer id);
 	
 }

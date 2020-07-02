@@ -14,6 +14,8 @@ import com.books.entity.goodsInfo.GoodsStockNumberBean;
 import com.books.util.base.ConstantUtils;
 import com.books.util.base.ExceptionConstantsUtils;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 
 import cn.hutool.core.date.DateUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -88,11 +90,14 @@ public class GoodsManageServiceImpl implements IGoodsManageService {
 
 
 	@Override
-	public ResultData<List<GoodsInfoBean>> findGoodsInfoList(GoodsInfoBean goodsInfoBean) {
+	public ResultData<PageInfo<GoodsInfoBean>> findGoodsInfoList(GoodsInfoBean goodsInfoBean,Integer pageNum, Integer pageSize) {
+		
+		// 分页
+		PageHelper.startPage(pageNum, pageSize);
 		
 		List<GoodsInfoBean> list  = goodsInfoMapper.findGoodsInfoList(goodsInfoBean);
-		
-		return ExceptionConstantsUtils.printSuccessMessage(log,"商品查询成功", list);
+		PageInfo<GoodsInfoBean> pageInfo = new PageInfo<GoodsInfoBean>(list);
+		return ExceptionConstantsUtils.printSuccessMessage(log,"商品查询成功", pageInfo);
 	}
 
 }

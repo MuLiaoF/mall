@@ -1,10 +1,9 @@
 package com.books.GoodsManage.service;
 
-import java.util.List;
-
 import com.books.entity.goodsInfo.GoodsInfoBean;
 import com.books.entity.goodsInfo.GoodsStockNumberBean;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageInfo;
 
 /**
 * @author Zhao yongbing
@@ -33,9 +32,11 @@ public interface IGoodsManageService {
 	/**
 	 * 查询商品信息
 	 * @param goodsInfoBean
+	 * @param pageSize 
+	 * @param pageNum 
 	 * @return
 	 */
-	ResultData<List<GoodsInfoBean>> findGoodsInfoList(GoodsInfoBean goodsInfoBean);
+	ResultData<PageInfo<GoodsInfoBean>> findGoodsInfoList(GoodsInfoBean goodsInfoBean, Integer pageNum, Integer pageSize);
 
 
 }

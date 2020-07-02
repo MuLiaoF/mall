@@ -4,6 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.books.entity.bookinfo.BookInfoBean;
 import com.books.util.base.ResultData;
+import com.github.pagehelper.PageInfo;
 
 /**
 * @author Zhao yongbing
@@ -22,5 +23,14 @@ public interface IBookManageService {
 	 * @return
 	 */
 	ResultData<String> uploadBookInfo(BookInfoBean bookInfo, MultipartFile[] files, MultipartFile defaultFile) throws Exception;
+
+	/**
+	 * 查询图书信息
+	 * @param bookInfo
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	ResultData<PageInfo<BookInfoBean>> findBookInfoList(BookInfoBean bookInfo, Integer pageNum, Integer pageSize);
 
 }
