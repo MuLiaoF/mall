@@ -124,7 +124,7 @@ public class BookManageServiceImpl implements IBookManageService{
 	@Override
 	public ResultData<PageInfo<BookInfoBean>> findBookInfoList(BookInfoBean bookInfo, Integer pageNum,
 			Integer pageSize) {
-		//PageHelper.startPage(pageNum, pageSize);
+		PageHelper.startPage(pageNum, pageSize);
 		List<BookInfoBean> list = mapper.findBookInfoList(bookInfo);
 		return ExceptionConstantsUtils.printSuccessMessage(log, "查询图书信息成功", new PageInfo<BookInfoBean>(list));
 	}
