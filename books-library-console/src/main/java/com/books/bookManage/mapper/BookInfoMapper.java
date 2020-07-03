@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.books.entity.bookinfo.BookInfoBean;
+import com.books.entity.bookinfo.BookLabelBean;
 import com.books.entity.booktype.BookTypeBean;
 
 /**
@@ -23,6 +24,17 @@ public interface BookInfoMapper  extends BaseMapper<BookInfoBean>{
 	 */
 	List<BookInfoBean> findBookInfoList(BookInfoBean bookInfo);
 	
-	List<BookTypeBean> getBookTypeById(Integer id);
+	/**
+	 * 根据bookId 获取 图书类型s
+	 * @param bookId
+	 * @return
+	 */
+	List<BookTypeBean> getBookTypesByBookId(Integer bookId);
+	/**
+	 *  根据bookId 获取 图书标签s
+	 * @param bookId
+	 * @return
+	 */
+	List<BookLabelBean> getBookLabelsByBookId(Integer bookId);
 	
 }

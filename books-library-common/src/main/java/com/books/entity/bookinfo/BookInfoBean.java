@@ -45,7 +45,10 @@ public class BookInfoBean {
     private Integer[] labelIds;
     
     @TableField(exist = false)
-    private List<BookTypeBean> bookTypeBean;
+    private List<BookTypeBean> bookTypeList;
+    
+    @TableField(exist = false)
+    private List<BookLabelBean> bookLabelList;
     
     public Integer getId() {
         return id;
@@ -135,13 +138,23 @@ public class BookInfoBean {
 		this.labelIds = labelIds;
 	}
 
-	public List<BookTypeBean> getBookTypeBean() {
-		return bookTypeBean;
+	public List<BookTypeBean> getBookTypeList() {
+		return bookTypeList;
 	}
 
-	public void setBookTypeBean(List<BookTypeBean> bookTypeBean) {
-		this.bookTypeBean = bookTypeBean;
+	public void setBookTypeList(List<BookTypeBean> bookTypeList) {
+		this.bookTypeList = bookTypeList;
 	}
+
+	public List<BookLabelBean> getBookLabelList() {
+		return bookLabelList;
+	}
+
+	public void setBookLabelList(List<BookLabelBean> bookLabelList) {
+		this.bookLabelList = bookLabelList;
+	}
+
+
 
 
 
