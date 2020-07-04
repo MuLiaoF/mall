@@ -79,4 +79,23 @@ public class BookInfoController {
 		return result;
 		
 	}
+	/**
+	 * 查询图书详情byId
+	 * @param pageNum
+	 * @param pageSize
+	 * @param bookInfo
+	 * @return
+	 */
+	@RequestMapping(value = "/findBookInfoById", method = RequestMethod.GET)
+	@ResponseBody
+	public ResultData<BookInfoBean> findBookInfoById(Integer bookInfoId) {
+		ResultData<BookInfoBean> result=null;
+		try {
+			result = service.findBookInfoById(bookInfoId);
+		} catch (Exception e) {
+			return ExceptionConstantsUtils.printErrorMessage(log, e ,"查询失败！！！");
+		}
+		return result;
+		
+	}
 }

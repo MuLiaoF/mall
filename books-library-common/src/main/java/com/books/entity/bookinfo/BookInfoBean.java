@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.books.entity.booktype.BookTypeBean;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
 * @author Zhao yongbing
@@ -32,11 +33,18 @@ public class BookInfoBean {
 
     private String defaultImgUrl;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date createTime;
-
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date updateTime;
 
     private String isdel;
+    
+    private String bookCode;
+    
+    private String contentValidity;
+    
+    private String editorRecommend;
 
     @TableField(exist = false)
     private Integer[] typeIds;
@@ -98,23 +106,25 @@ public class BookInfoBean {
         this.defaultImgUrl = defaultImgUrl == null ? null : defaultImgUrl.trim();
     }
 
-    public Date getCreateTime() {
-        return createTime;
-    }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
 
-    public Date getUpdateTime() {
-        return updateTime;
-    }
+	public Date getCreateTime() {
+		return createTime;
+	}
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
-    public String getIsdel() {
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public String getIsdel() {
         return isdel;
     }
 
@@ -154,6 +164,31 @@ public class BookInfoBean {
 		this.bookLabelList = bookLabelList;
 	}
 
+	public String getBookCode() {
+		return bookCode;
+	}
+
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
+	}
+
+	public String getContentValidity() {
+		return contentValidity;
+	}
+
+	public void setContentValidity(String contentValidity) {
+		this.contentValidity = contentValidity;
+	}
+
+	public String getEditorRecommend() {
+		return editorRecommend;
+	}
+
+	public void setEditorRecommend(String editorRecommend) {
+		this.editorRecommend = editorRecommend;
+	}
+
+	
 
 
 

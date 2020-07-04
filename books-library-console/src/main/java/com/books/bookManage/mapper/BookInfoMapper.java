@@ -36,5 +36,12 @@ public interface BookInfoMapper  extends BaseMapper<BookInfoBean>{
 	 * @return
 	 */
 	List<BookLabelBean> getBookLabelsByBookId(Integer bookId);
+
+	/**
+	 * 根据图书id查询图书详情
+	 * @param bookInfoId
+	 * @return
+	 */
+	BookInfoBean findBookInfoById(Integer bookInfoId);
 	
 }

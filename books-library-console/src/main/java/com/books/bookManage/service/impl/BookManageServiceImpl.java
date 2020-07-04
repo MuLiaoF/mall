@@ -129,5 +129,11 @@ public class BookManageServiceImpl implements IBookManageService{
 		return ExceptionConstantsUtils.printSuccessMessage(log, "查询图书信息成功", new PageInfo<BookInfoBean>(list));
 	}
 
+	@Override
+	public ResultData<BookInfoBean> findBookInfoById(Integer bookInfoId) {
+		BookInfoBean bookInfoBean = mapper.findBookInfoById(bookInfoId);
+		return ExceptionConstantsUtils.printSuccessMessage(log, "查询图书详情成功", bookInfoBean);
+	}
+
 	
 }

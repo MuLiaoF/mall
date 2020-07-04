@@ -8,11 +8,28 @@
 	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
 	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
 	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
-	    <result column="create_time" property="createTime" jdbcType="DATE" />
-	    <result column="update_time" property="updateTime" jdbcType="DATE" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+	    <result column="content_validity" property="contentValidity" jdbcType="VARCHAR" />
+	    <result column="editor_recommend" property="editorRecommend" jdbcType="VARCHAR" />
+</resultMap>
+<resultMap id="BookInfoResultMap" type="com.books.entity.bookinfo.BookInfoBean">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+	    <result column="author" property="author" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+	    <result column="content_validity" property="contentValidity" jdbcType="VARCHAR" />
+	    <result column="editor_recommend" property="editorRecommend" jdbcType="VARCHAR" />
 	    
-	   <!--  <collection property="bookTypeList" ofType="com.books.entity.booktype.BookTypeBean"
+	   <collection property="bookTypeList" ofType="com.books.entity.booktype.BookTypeBean"
 	     select="com.books.bookManage.mapper.BookInfoMapper.getBookTypesByBookId"
 			column='id'>
 	    </collection>
@@ -20,7 +37,7 @@
 	    <collection property="bookLabelList" ofType="com.books.entity.bookinfo.BookLabelBean"
 	     select="com.books.bookManage.mapper.BookInfoMapper.getBookLabelsByBookId"
 			column='id'>
-	    </collection> -->
+	    </collection>
 	   <!-- 这种方式分页不正确 -->
 	   <!-- <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean">
 			<id column="t_id" property="id"/>
@@ -49,7 +66,10 @@
 		  b.default_img_url,
 		  b.create_time,
 		  b.update_time,
-		  b.isdel
+		  b.isdel,
+		  b.book_code,
+		  b.content_validity,
+		  b.editor_recommend
 	FROM
 		tbl_book_info b 
 	left join tbl_book_info_type t on b.id = t.book_info_id
@@ -90,5 +110,24 @@
 	SELECT lb.id,lb.label_name from tbl_book_info_label l
 	LEFT JOIN tbl_book_label lb on l.label_id =lb.id
 	WHERE l.isdel = '0' and l.book_info_id = #{bookId}
+</select>
+
+<select id="findBookInfoById" parameterType="java.lang.Integer" resultMap="BookInfoResultMap">
+	SELECT   
+		  b.id,
+		  b.book_name,
+		  b.author,
+		  b.publisher,
+		  b.img_url_json,
+		  b.default_img_url,
+		  b.create_time,
+		  b.update_time,
+		  b.isdel,
+		  b.book_code,
+		  b.content_validity,
+		  b.editor_recommend
+	FROM
+		tbl_book_info b 
+	where  b.isdel = '0' and b.id =#{bookInfoId}	
 </select>
 </mapper>

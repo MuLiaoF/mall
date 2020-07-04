@@ -9,11 +9,12 @@
     <result column="discount" property="discount" jdbcType="INTEGER" />
     <result column="old_price" property="oldPrice" jdbcType="DECIMAL" />
     <result column="benefit_type" property="benefitType" jdbcType="VARCHAR" />
-    <result column="put_date" property="putDate" jdbcType="DATE" />
-    <result column="off_date" property="offDate" jdbcType="DATE" />
+    <result column="put_date" property="putDate" jdbcType="TIMESTAMP" />
+    <result column="off_date" property="offDate" jdbcType="TIMESTAMP" />
     <result column="sort" property="sort" jdbcType="INTEGER" />
     <result column="isdel" property="isdel" jdbcType="VARCHAR" />
     <result column="is_off" property="isOff" jdbcType="VARCHAR" />
+    <result column="stock_number" property="stockNumber" jdbcType="INTEGER" />
     
    <association property="bookInfoBean" column="bookInfoBean" javaType="com.books.entity.bookinfo.BookInfoBean">
 		<result column="book_name" property="bookName" jdbcType="VARCHAR" />
@@ -21,9 +22,12 @@
 	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
 	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
 	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
-	    <result column="create_time" property="createTime" jdbcType="DATE" />
-	    <result column="update_time" property="updateTime" jdbcType="DATE" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
 	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+	    <result column="content_validity" property="contentValidity" jdbcType="VARCHAR" />
+	    <result column="editor_recommend" property="editorRecommend" jdbcType="VARCHAR" />
   </association>
 </resultMap>
 
@@ -43,7 +47,10 @@
 		b.publisher,
 		b.img_url_json,
 		b.default_img_url,
-		b.author 
+		b.author,
+		b.book_code,
+		b.content_validity,
+		b.editor_recommend 
 	FROM
 		tbl_goods_info g
 		LEFT JOIN tbl_book_info b ON g.book_info_id = b.id
@@ -53,25 +60,35 @@
 		LEFT JOIN tbl_book_info_label l on l.book_info_id = b.id
 		LEFT JOIN tbl_book_label lb on l.label_id = lb.id
 		where	g.isdel = '0'
-		<if test="bookInfoBean.bookName != null and bookInfoBean.bookName != '' ">
-			and b.book_name like '%${bookInfoBean.bookName}%'
+		<if test="id != null and id != '' ">
+			and g.id = #{id}
 		</if>
-		<if test="isOff != null and isOff != '' ">
-			and g.is_off =#{isOff}
-		</if>
-		<if test="bookInfoBean.typeIds != null">
-			and t.type_id in
-			<foreach collection="bookInfoBean.typeIds" index="index" item="item" separator="," open="(" close=")">
-			   ${item}
-			</foreach>
-			
-		</if>
-		<if test="bookInfoBean.labelIds != null">
-			and l.label_id in 
-			<foreach collection="bookInfoBean.labelIds" index="index" item="item" separator="," open="(" close=")">
-			   ${item}
-			</foreach>
-		</if>
+		<if test="id == null or id == '' ">
+			<if test="bookInfoBean.bookName != null and bookInfoBean.bookName != '' ">
+				and b.book_name like '%' #{bookInfoBean.bookName} '%'
+			</if>
+			<if test="bookInfoBean.author != null and bookInfoBean.author != '' ">
+				and b.author like '%' #{bookInfoBean.author} '%'
+			</if>
+			<if test="bookInfoBean.publisher != null and bookInfoBean.publisher != '' ">
+				and b.publisher like '%' #{bookInfoBean.publisher} '%'
+			</if>
+			<if test="isOff != null and isOff != '' ">
+				and g.is_off =#{isOff}
+			</if>
+			<if test="bookInfoBean.typeIds != null">
+				and t.type_id in
+				<foreach collection="bookInfoBean.typeIds" index="index" item="item" separator="," open="(" close=")">
+				   ${item}
+				</foreach>
+			</if>
+			<if test="bookInfoBean.labelIds != null">
+				and l.label_id in 
+				<foreach collection="bookInfoBean.labelIds" index="index" item="item" separator="," open="(" close=")">
+				   ${item}
+				</foreach>
+			</if>
+		</if>	
 	
 </select>
    

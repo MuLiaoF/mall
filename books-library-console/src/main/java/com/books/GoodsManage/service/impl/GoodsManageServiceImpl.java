@@ -43,14 +43,23 @@ public class GoodsManageServiceImpl implements IGoodsManageService {
 		
 		// 修改
 		if(goodsInfoBean.getId() != null) {
+			printMsg = "商品修改成功!";
+			if(goodsInfoBean.getIsOff() != null) {
+				if(ConstantUtils.isPut.equals(goodsInfoBean.getIsOff())) {
+					goodsInfoBean.setPutDate(DateUtil.date()); //上架时间
+				}else {
+					goodsInfoBean.setOffDate(DateUtil.date()); //下架时间
+				}
+			}
 			goodsInfoMapper.updateById(goodsInfoBean);
 			goodsStockNumberBean.setGoodsId(goodsInfoBean.getId());
-			if(goodsStockNumberBean.getStockNumber() == null) {
+			if(goodsInfoBean.getIsdel() != null) {
 				// 删除
 				goodsStockNumberBean.setIsdel(ConstantUtils.isDel);
+				printMsg = "商品删除成功!";
 			}
 			goodsStockNumberMapper.updateById(goodsStockNumberBean);  // 保存库存数
-			printMsg = "商品修改成功!";
+			
 		}else {
 			// 新增
 			goodsInfoBean.setIsdel(ConstantUtils.isNotDel);
