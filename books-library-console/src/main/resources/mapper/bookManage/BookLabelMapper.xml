@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.books.bookManage.mapper.BookLabelMapper">
+    <!--插入一个标签-->
+    <insert id="addBookLabel" parameterType="com.books.entity.booklabel.BookLabelBean">
+        INSERT INTO tbl_book_label VALUES(null,#{label_name},#{isdel})
+    </insert>
+    <!--如果存在当前ID返回1，不存在返回0-->
+    <select id="queryIdExists" parameterType="int" resultType="int">
+        SELECT DISTINCT IF(EXISTS(SELECT * FROM tbl_book_label WHERE id = #{id}),1,0) AS a FROM tbl_book_label
+    </select>
+    <!--如果存在当前标签名返回1，不存在返回0-->
+    <select id="queryLabelExists" parameterType="string" resultType="int">
+        SELECT DISTINCT IF(EXISTS(SELECT * FROM tbl_book_label WHERE label_name = #{label_name}),1,0) AS a FROM tbl_book_label
+    </select>
+    <!--根据ID删除一个标签-->
+    <delete id="deleteLabelById" parameterType="int">
+        DELETE FROM tbl_book_label WHERE id = #{id}
+    </delete>
+    <!--根据标签名进行删除-->
+    <delete id="deleteByName" parameterType="string">
+        DELETE FROM tbl_book_label WHERE label_name = #{label_name}
+    </delete>
+    <!--根据ID修改标签-->
+    <update id="updateLabelById" parameterType="com.books.entity.booklabel.BookLabelBean">
+        UPDATE tbl_book_label SET
+        <if test="label_name!=null and isdel!=null">
+            label_name = #{label_name},isdel = #{isdel}
+        </if>
+        <if test="label_name!=null and isdel==null">
+            label_name = #{label_name}
+        </if>
+
+        <if test="label_name==null and isdel!=null">
+            isdel = #{isdel}
+        </if>
+        WHERE id = #{id}
+    </update>
+    <!--根据ID进行查询-->
+    <select id="selectLabelById" parameterType="int" resultType="com.books.entity.booklabel.BookLabelBean">
+        SELECT * FROM tbl_book_label WHERE id = #{id}
+    </select>
+    <!--查询所有-->
+    <select id="selectAll" resultType="com.books.entity.booklabel.BookLabelBean">
+        SELECT * FROM tbl_book_label
+    </select>
+</mapper>
