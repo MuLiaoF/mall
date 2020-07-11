@@ -39,7 +39,7 @@ public class BookTypeController {
     public ResultData<String> addOneBookType(BookTypeBean bookTypeBean){
         ResultData<String> resultData = new ResultData<>();
         try{
-            //插入
+            //插入图书类型
             service.addOneBookType(bookTypeBean);
             //resultData.setCode(ConstantUtils.SUCCESS_CODE);
             //resultData.setSuccess(ConstantUtils.SUCCESS_MESSAGE);
