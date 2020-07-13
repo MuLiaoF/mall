@@ -31,11 +31,10 @@ public class AuthUserController {
     @Autowired
     private IAuthUserService authUserService;
 
-
     /**
      * 初始化粉丝信息获取openID
      *
-     * @param memMiniFansReq
+     * @param memMiniFansReq 初始化参数
      * @return
      */
     @PostMapping("/member/v1/mini/fans/init")

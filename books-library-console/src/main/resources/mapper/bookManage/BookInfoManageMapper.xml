@@ -36,22 +36,22 @@
 
 
 	<resultMap id="BaseResultMap" type="com.books.bookManage.mapper.BookInfoMapper">
-	    <id column="id" property="id" jdbcType="INTEGER" />
-	    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
-	    <result column="author" property="author" jdbcType="VARCHAR" />
-	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
-	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
-	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
-	    <result column="create_time" property="createTime" jdbcType="DATE" />
-	    <result column="update_time" property="updateTime" jdbcType="DATE" />
-	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
-	    
-<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
-<!-- 			<id column="t_id" property="id"/> -->
-<!-- 		    <result column="t_pid" property="pid"/> -->
-<!-- 		    <result column="t_type_name" property="typeName"/> -->
-<!-- 	   </collection> -->
-	</resultMap>
+	<id column="id" property="id" jdbcType="INTEGER" />
+	<result column="book_name" property="bookName" jdbcType="VARCHAR" />
+	<result column="author" property="author" jdbcType="VARCHAR" />
+	<result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	<result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+	<result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+	<result column="create_time" property="createTime" jdbcType="DATE" />
+	<result column="update_time" property="updateTime" jdbcType="DATE" />
+	<result column="isdel" property="isdel" jdbcType="VARCHAR" />
+
+	<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
+	<!-- 			<id column="t_id" property="id"/> -->
+	<!-- 		    <result column="t_pid" property="pid"/> -->
+	<!-- 		    <result column="t_type_name" property="typeName"/> -->
+	<!-- 	   </collection> -->
+</resultMap>
 
 
 <select id="getBookTypeById" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">

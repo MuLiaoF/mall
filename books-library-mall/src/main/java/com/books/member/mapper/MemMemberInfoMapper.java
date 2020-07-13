@@ -1,7 +1,6 @@
 package com.books.member.mapper;
 
-import com.books.entity.member.MemMemberInfo;
-import com.books.mapper.BaseMemMemberInfoMapper;
+import com.books.mapper.user.BaseMemMemberInfoMapper;
 
 /**
  * @author feng

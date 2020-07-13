@@ -1,4 +1,4 @@
-package com.books.mapper;
+package com.books.mapper.user;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.books.entity.member.SysAuthUser;
