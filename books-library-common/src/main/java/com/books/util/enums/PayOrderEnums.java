@@ -4,8 +4,8 @@ package com.books.util.enums;
 public enum  PayOrderEnums {
 
     /** 订单最终状态 **/
-    RESULT_STATUS_ERROR("2", "支付成功"),
-    RESULT_STATUS_SUCCESS("1", "支付失败"),
+    RESULT_STATUS_ERROR("2", "支付失败"),
+    RESULT_STATUS_SUCCESS("1", "支付成功"),
 
     /** 正向订单反向订单 **/
     ORDER_TYPE_PAY_FORWARD("0", "正向订单"),

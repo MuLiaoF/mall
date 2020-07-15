@@ -38,6 +38,10 @@ public class PayMemberOrderServiceImpl implements PayMemberOrderService {
     @Override
     public PayMemOrder createMemeberOrder(Integer id, Integer goodsId) throws Exception {
 
+        PayMemOrder paramMemOrder = new PayMemOrder();
+        paramMemOrder.setAuthUserId(id);
+        PayMemOrder memOrder = payMemOrderMapper.selectOne(Wrappers.query(paramMemOrder));
+
         PayCreateCardRuleDetail payCreateCardRuleDetail = payCreateCardRuleDetailMapper.selectById(goodsId);
         if(payCreateCardRuleDetail == null) {
             throw new RuntimeException("该活动不存在");
@@ -63,7 +67,7 @@ public class PayMemberOrderServiceImpl implements PayMemberOrderService {
         PayMemOrder payMemOrder = null;
         //是续费会员
         if(isRenew.equals(RuleEnums.IS_RENEW_TRUE.getCode())) {
-            payMemOrder = isTrueMember(payCreateCardRuleDetail , selMemberInfo, id);
+            payMemOrder = isTrueMember(payCreateCardRuleDetail ,memOrder, selMemberInfo, id);
         } else {
             payMemOrder = isFalseMember(payCreateCardRule, selMemberInfo);
         }
@@ -76,7 +80,7 @@ public class PayMemberOrderServiceImpl implements PayMemberOrderService {
      * @param selMemberInfo
      * @return
      */
-    private PayMemOrder isTrueMember(PayCreateCardRuleDetail payCreateCardRuleDetail,  MemMemberInfo selMemberInfo, Integer authId) throws Exception {
+    private PayMemOrder isTrueMember(PayCreateCardRuleDetail payCreateCardRuleDetail, PayMemOrder order,  MemMemberInfo selMemberInfo, Integer authId) throws Exception {
         //如果是查询不到会员，说明是第一次注册会员
         BigDecimal nowPrice = payCreateCardRuleDetail.getNowPrice();
         PayMemOrder payMemOrder = new PayMemOrder();
@@ -86,6 +90,9 @@ public class PayMemberOrderServiceImpl implements PayMemberOrderService {
         payMemOrder.setResultStatus(PayOrderEnums.RESULT_STATUS_SUCCESS.getCode());
         payMemOrder.setAuthUserId(authId);
         if(selMemberInfo == null) {
+            if(order != null || !order.getOrderStatus().equals(PayOrderEnums.ORDER_STATUS_ERROR.getCode())) {
+                throw new RuntimeException("请完成之前的订单");
+            }
             payMemOrder.setGoodsPrice(nowPrice);
         } else {
             payMemOrder.setMemberId(selMemberInfo.getId());
