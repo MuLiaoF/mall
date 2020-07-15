@@ -14,6 +14,7 @@ import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 @RestController
 @Slf4j
+@RequestMapping("/auth")
 public class AuthUserController {
 
     @Autowired
@@ -37,7 +39,7 @@ public class AuthUserController {
      * @param memMiniFansReq 初始化参数
      * @return
      */
-    @PostMapping("/member/v1/mini/fans/init")
+    @PostMapping("/v1/mini/fans/init")
     public ResultData initMiniFans(@RequestBody MemMiniFansReq memMiniFansReq) {
         String appid = memMiniFansReq.getAppid();
         String code = memMiniFansReq.getCode();
@@ -65,7 +67,7 @@ public class AuthUserController {
      * @return
      * @throws Exception
      */
-    @PostMapping("/member/v1/get/mini/fans/info")
+    @PostMapping("/v1/get/mini/fans/info")
     public ResultData modifyMemMiniFans(@RequestBody InitMemMiniFansReq memMiniFans, HttpServletRequest request) throws Exception {
         log.info("---------------> 解密参数" + memMiniFans);
         InitMemMiniFansReq.UserInfoWx userInfo = memMiniFans.getUserInfo();

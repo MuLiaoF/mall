@@ -21,15 +21,15 @@ public class WXPayExcepFactor extends ExcepFactor {
 
     public static final WXPayExcepFactor E_UNIFIED_ORDER_FAIL = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 4,
-            "unified order fail!", "统一下单失败!");
+            "unified pay fail!", "统一下单失败!");
 
     public static final WXPayExcepFactor E_ORDER_PAID = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 5,
-            "order paid!", "商户订单已支付!");
+            "pay paid!", "商户订单已支付!");
 
     public static final WXPayExcepFactor E_ORDER_CLOSED = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 6,
-            "order closed!", "订单已关闭!");
+            "pay closed!", "订单已关闭!");
 
     public static final WXPayExcepFactor E_OUT_TRADE_NO_USED = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 7,
@@ -37,11 +37,11 @@ public class WXPayExcepFactor extends ExcepFactor {
 
     public static final WXPayExcepFactor E_ORDER_NOT_EXIST = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 8,
-            "order not exist!", "订单不存在!");
+            "pay not exist!", "订单不存在!");
 
     public static final WXPayExcepFactor E_CLOSE_ORDER_FAIL = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 9,
-            "close order fail!", "关闭订单失败!");
+            "close pay fail!", "关闭订单失败!");
 
     public static final WXPayExcepFactor E_SHORT_URL_FAIL = new WXPayExcepFactor(
             HttpStatus.BAD_REQUEST, 10,

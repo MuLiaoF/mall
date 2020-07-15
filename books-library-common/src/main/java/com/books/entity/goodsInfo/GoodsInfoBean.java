@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.books.entity.bookinfo.BookInfoBean;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @TableName("tbl_goods_info")
 public class GoodsInfoBean implements Serializable{
@@ -30,8 +31,10 @@ public class GoodsInfoBean implements Serializable{
 
     private String benefitType;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date putDate;
 
+    @JsonFormat(shape=JsonFormat.Shape.STRING,pattern="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
     private Date offDate;
 
     private Integer sort;

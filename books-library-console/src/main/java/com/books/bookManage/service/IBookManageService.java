@@ -33,4 +33,11 @@ public interface IBookManageService {
 	 */
 	ResultData<PageInfo<BookInfoBean>> findBookInfoList(BookInfoBean bookInfo, Integer pageNum, Integer pageSize);
 
+	/**
+	 * 查询图书信息byId
+	 * @param bookInfoId
+	 * @return
+	 */
+	ResultData<BookInfoBean> findBookInfoById(Integer bookInfoId);
+
 }

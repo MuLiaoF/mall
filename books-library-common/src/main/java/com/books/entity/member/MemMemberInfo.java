@@ -26,9 +26,6 @@ public class MemMemberInfo extends BaseEntity
      */
     private Integer mid;
 
-    /** 万鼎唯一会员卡号 */
-    private String wdMemCardCode;
-
     /**
      * 会员号（领取会员卡后分配的会员编号）
      */

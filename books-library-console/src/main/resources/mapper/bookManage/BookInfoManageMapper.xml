@@ -1,21 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.books.bookManage.mapper.BookInfoMapper">
-	
+<resultMap id="BaseResultMap" type="com.books.entity.bookinfo.BookInfoBean">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+	    <result column="author" property="author" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+	    <result column="content_validity" property="contentValidity" jdbcType="VARCHAR" />
+	    <result column="editor_recommend" property="editorRecommend" jdbcType="VARCHAR" />
+</resultMap>
+<resultMap id="BookInfoResultMap" type="com.books.entity.bookinfo.BookInfoBean">
+	    <id column="id" property="id" jdbcType="INTEGER" />
+	    <result column="book_name" property="bookName" jdbcType="VARCHAR" />
+	    <result column="author" property="author" jdbcType="VARCHAR" />
+	    <result column="publisher" property="publisher" jdbcType="VARCHAR" />
+	    <result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+	    <result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+	    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+	    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+	    <result column="isdel" property="isdel" jdbcType="VARCHAR" />
+	    <result column="book_code" property="bookCode" jdbcType="VARCHAR" />
+	    <result column="content_validity" property="contentValidity" jdbcType="VARCHAR" />
+	    <result column="editor_recommend" property="editorRecommend" jdbcType="VARCHAR" />
+	    
+	   <collection property="bookTypeList" ofType="com.books.entity.booktype.BookTypeBean"
+	     select="com.books.bookManage.mapper.BookInfoMapper.getBookTypesByBookId"
+			column='id'>
+	    </collection>
+	    
+	    <collection property="bookLabelList" ofType="com.books.entity.bookinfo.BookLabelBean"
+	     select="com.books.bookManage.mapper.BookInfoMapper.getBookLabelsByBookId"
+			column='id'>
+	    </collection>
+	   <!-- 这种方式分页不正确 -->
+	   <!-- <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean">
+			<id column="t_id" property="id"/>
+		    <result column="t_pid" property="pid"/>
+		    <result column="t_type_name" property="typeName"/>
+	   </collection> -->
+</resultMap>
 <!-- 添加图书-类型-关系 -->
-<insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
+<!--<insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
 
 	insert into tbl_book_info_type (id,type_id,book_info_id,isdel,create_time) values
 	<foreach collection="typeIds" index="index" item="item"  separator=",">
 	    (null, #{item},#{id},#{isdel},#{createTime})
 	</foreach>
 
-</insert>
+</insert>-->
 
 <!-- 查询图书list -->
-<select id="findBookInfoList"  resultMap="BaseResultMap">
-
-		SELECT
+<select id="findBookInfoList" parameterType="com.books.entity.bookinfo.BookInfoBean" resultMap="BaseResultMap">
+	SELECT DISTINCT
 		  b.id,
 		  b.book_name,
 		  b.author,
@@ -25,38 +67,86 @@
 		  b.create_time,
 		  b.update_time,
 		  b.isdel,
-		  ty.id t_id,
-		  ty.pid t_pid,
-		  ty.type_name t_type_name
+		  b.book_code,
+		  b.content_validity,
+		  b.editor_recommend
 	FROM
-		tbl_book_info b
-		LEFT JOIN tbl_book_info_type t ON b.id = t.book_info_id
-		LEFT JOIN tbl_book_type ty ON ty.id = t.type_id
+		tbl_book_info b 
+	left join tbl_book_info_type t on b.id = t.book_info_id
+	left join tbl_book_info_label l on b.id = l.book_info_id
+	where  b.isdel = '0'
+	<if test="typeIds != null">
+			and t.type_id in
+			<foreach collection="typeIds" index="index" item="item" separator="," open="(" close=")">
+			   ${item}
+			</foreach>
+	</if>
+	<if test="labelIds != null">
+			and l.label_id in 
+			<foreach collection="labelIds" index="index" item="item" separator="," open="(" close=")">
+			   ${item}
+			</foreach>
+	</if>
+	<if test="bookName != null and bookName != '' ">
+			and b.book_name like '%' #{bookName} '%' 
+	</if>
+	<if test="author != null and author != '' ">
+			and b.author like '%' #{author} '%'
+	</if>
+	<if test="publisher != null and publisher != '' ">
+			and b.publisher like '%' #{publisher} '%'
+	</if>
 </select>
 
+	<resultMap id="BaseResultMap1" type="com.books.entity.bookinfo.BookInfoBean">
+			<id column="id" property="id" jdbcType="INTEGER" />
+			<result column="book_name" property="bookName" jdbcType="VARCHAR" />
+			<result column="author" property="author" jdbcType="VARCHAR" />
+			<result column="publisher" property="publisher" jdbcType="VARCHAR" />
+			<result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+			<result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+			<result column="create_time" property="createTime" jdbcType="DATE" />
+			<result column="update_time" property="updateTime" jdbcType="DATE" />
+			<result column="isdel" property="isdel" jdbcType="VARCHAR" />
 
-	<resultMap id="BaseResultMap" type="com.books.bookManage.mapper.BookInfoMapper">
-	<id column="id" property="id" jdbcType="INTEGER" />
-	<result column="book_name" property="bookName" jdbcType="VARCHAR" />
-	<result column="author" property="author" jdbcType="VARCHAR" />
-	<result column="publisher" property="publisher" jdbcType="VARCHAR" />
-	<result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
-	<result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
-	<result column="create_time" property="createTime" jdbcType="DATE" />
-	<result column="update_time" property="updateTime" jdbcType="DATE" />
-	<result column="isdel" property="isdel" jdbcType="VARCHAR" />
-
-	<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
-	<!-- 			<id column="t_id" property="id"/> -->
-	<!-- 		    <result column="t_pid" property="pid"/> -->
-	<!-- 		    <result column="t_type_name" property="typeName"/> -->
-	<!-- 	   </collection> -->
-</resultMap>
+			<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
+			<!-- 			<id column="t_id" property="id"/> -->
+			<!-- 		    <result column="t_pid" property="pid"/> -->
+			<!-- 		    <result column="t_type_name" property="typeName"/> -->
+			<!-- 	   </collection> -->
+		</resultMap>
 
 
-<select id="getBookTypeById" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">
+<!-- colelction 子查询 查询图书类型  -->
+<select id="getBookTypesByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">
 	SELECT ty.id,ty.pid,ty.type_name typeName,ty.status from tbl_book_info_type t
 	LEFT JOIN tbl_book_type ty on t.type_id = ty.id
-	WHERE t.book_info_id = #{id}
+	WHERE t.isdel = '0' and t.book_info_id = #{bookId}
+</select>
+
+<!-- colelction 子查询 查询图书标签  -->
+<select id="getBookLabelsByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.bookinfo.BookLabelBean">
+	SELECT lb.id,lb.label_name from tbl_book_info_label l
+	LEFT JOIN tbl_book_label lb on l.label_id =lb.id
+	WHERE l.isdel = '0' and l.book_info_id = #{bookId}
+</select>
+
+<select id="findBookInfoById" parameterType="java.lang.Integer" resultMap="BookInfoResultMap">
+	SELECT   
+		  b.id,
+		  b.book_name,
+		  b.author,
+		  b.publisher,
+		  b.img_url_json,
+		  b.default_img_url,
+		  b.create_time,
+		  b.update_time,
+		  b.isdel,
+		  b.book_code,
+		  b.content_validity,
+		  b.editor_recommend
+	FROM
+		tbl_book_info b 
+	where  b.isdel = '0' and b.id =#{bookInfoId}	
 </select>
 </mapper>
