@@ -1,5 +1,6 @@
 package com.books.entity.member;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.books.util.base.BaseEntity;
 import lombok.Data;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -13,6 +14,7 @@ import java.util.Date;
  * @author baijiao
  */
 @Data
+@TableName("sys_auth_user")
 public class SysAuthUser extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
