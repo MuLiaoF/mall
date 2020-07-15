@@ -69,7 +69,6 @@ public class PayOrderServiceImpl implements IPayOrderService {
         BigDecimal goodsPriceSum = new BigDecimal("0");
         BigDecimal oldPriceSum = new BigDecimal("0");
 
-
         List<PayOrderGoods> orderGoods = new ArrayList<>();
 
         for (GoodsInfoBean goodsInfoBean : goodsInfoBeans) {
@@ -89,7 +88,6 @@ public class PayOrderServiceImpl implements IPayOrderService {
 
             orderGoods.add(payOrderGoods);
         }
-
 
         payOrder.setAmount(goodsPriceSum);
 
