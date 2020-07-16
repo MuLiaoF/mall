@@ -2,6 +2,8 @@ package com.books.order.service;
 
 import com.books.entity.member.SysAuthUser;
 import com.books.entity.order.entity.PayOrder;
+import com.books.request.pay.UpdateOrderReq;
+import com.books.util.base.ResultData;
 
 import java.util.List;
 
@@ -17,4 +19,12 @@ public interface IPayOrderService {
      * @throws Exception
      */
     PayOrder createOrder(List<Integer> goodsIds, SysAuthUser user) throws Exception;
+
+    /**
+     * 更新订单失败
+     * @param updateOrderReq
+     * @return
+     * @throws Exception
+     */
+    ResultData editSaveStatus(UpdateOrderReq updateOrderReq)  throws Exception;
 }

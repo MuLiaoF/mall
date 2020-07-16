@@ -2,15 +2,15 @@ package com.books.entity.order.entity;
 
 
 import lombok.Data;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Data
 public class PayOrder {
 
-  private long id;
-  private long mid;
-  private long sid;
+  private Integer id;
   private String orderId;
   private String outTradeNo;
   private String channelOrderId;
@@ -27,8 +27,8 @@ public class PayOrder {
   private String orderStatus;
   private String refundStatus;
   private long authUserId;
-  private java.sql.Timestamp payTime;
-  private java.sql.Timestamp createTime;
-  private java.sql.Timestamp updateTime;
+  private Timestamp payTime;
+  private Timestamp createTime;
+  private Timestamp updateTime;
 
 }
