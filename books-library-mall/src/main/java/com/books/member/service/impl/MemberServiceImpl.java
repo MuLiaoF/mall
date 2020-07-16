@@ -120,7 +120,7 @@ public class MemberServiceImpl implements IMemberService {
         memberAccountMapper.insert(memAccount);
         memberBonusMapper.insert(memBonus);
         memberDepositMapper.insert(memDeposit);
-        
+
         return memMemberInfo;
     }
 }
