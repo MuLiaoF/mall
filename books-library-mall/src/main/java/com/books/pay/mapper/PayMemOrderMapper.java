@@ -1,7 +1,7 @@
 package com.books.pay.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.books.entity.order.PayMemOrder;
+import com.books.entity.order.entity.PayMemOrder;
 
 /**
  * @author feng

@@ -2,7 +2,7 @@ package com.books.member.mapper;
 
 
 
-import com.books.mapper.BaseAuthUserMapper;
+import com.books.mapper.user.BaseAuthUserMapper;
 import com.books.request.member.InitMemMiniFansReq;
 
 /**

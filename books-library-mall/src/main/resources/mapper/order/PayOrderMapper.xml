@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mapper namespace="com.books.order.mapper.PayOrderMapper">
+    <!-- 字段映射 -->
+    <resultMap id="tblPayOrderMap" type="com.books.entity.order.entity.PayOrder">
+        <id column="id" property="id" jdbcType="VARCHAR" />
+        <result column="mid" property="mid" jdbcType="INTEGER" />
+        <result column="sid" property="sid" jdbcType="INTEGER" />
+        <result column="order_id" property="orderId" jdbcType="VARCHAR" />
+        <result column="out_trade_no" property="outTradeNo" jdbcType="VARCHAR" />
+        <result column="channel_order_id" property="channelOrderId" jdbcType="VARCHAR" />
+        <result column="channel" property="channel" jdbcType="VARCHAR" />
+        <result column="amount" property="amount" jdbcType="DECIMAL" />
+        <result column="order_type" property="orderType" jdbcType="VARCHAR" />
+        <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+        <result column="pay_way" property="payWay" jdbcType="VARCHAR" />
+        <result column="pay_type" property="payType" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="VARCHAR" />
+        <result column="scene" property="scene" jdbcType="VARCHAR" />
+        <result column="front_url" property="frontUrl" jdbcType="VARCHAR" />
+        <result column="result_status" property="resultStatus" jdbcType="VARCHAR" />
+        <result column="order_status" property="orderStatus" jdbcType="VARCHAR" />
+        <result column="refund_status" property="refundStatus" jdbcType="VARCHAR" />
+        <result column="auth_user_id" property="authUserId" jdbcType="INTEGER" />
+        <result column="pay_time" property="payTime" jdbcType="TIMESTAMP" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+    
+    <!-- 表查询字段 -->
+    <sql id="allColumns">
+        id, mid, sid, order_id, out_trade_no, channel_order_id, channel, amount, 
+        order_type, parent_id, pay_way, pay_type, status, scene, front_url, result_status, 
+        order_status, refund_status, auth_user_id, pay_time, create_time, update_time
+    </sql>
+
+    
+    <!-- 根据主键批量删除数据 -->
+    <!--<delete id="deleteTblPayOrderByIds" parameterType="list">
+        DELETE FROM tbl_pay_order WHERE id IN
+        <foreach collection="list" index="index" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    -->
+</mapper>

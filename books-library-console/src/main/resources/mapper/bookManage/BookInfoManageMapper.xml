@@ -46,14 +46,14 @@
 	   </collection> -->
 </resultMap>
 <!-- 添加图书-类型-关系 -->
-<insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
+<!--<insert id="addBookInfoType" parameterType="com.books.entity.bookinfo.BookInfoBean">
 
 	insert into tbl_book_info_type (id,type_id,book_info_id,isdel,create_time) values
 	<foreach collection="typeIds" index="index" item="item"  separator=",">
 	    (null, #{item},#{id},#{isdel},#{createTime})
 	</foreach>
 
-</insert>
+</insert>-->
 
 <!-- 查询图书list -->
 <select id="findBookInfoList" parameterType="com.books.entity.bookinfo.BookInfoBean" resultMap="BaseResultMap">
@@ -97,6 +97,25 @@
 			and b.publisher like '%' #{publisher} '%'
 	</if>
 </select>
+
+	<resultMap id="BaseResultMap1" type="com.books.entity.bookinfo.BookInfoBean">
+			<id column="id" property="id" jdbcType="INTEGER" />
+			<result column="book_name" property="bookName" jdbcType="VARCHAR" />
+			<result column="author" property="author" jdbcType="VARCHAR" />
+			<result column="publisher" property="publisher" jdbcType="VARCHAR" />
+			<result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
+			<result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
+			<result column="create_time" property="createTime" jdbcType="DATE" />
+			<result column="update_time" property="updateTime" jdbcType="DATE" />
+			<result column="isdel" property="isdel" jdbcType="VARCHAR" />
+
+			<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
+			<!-- 			<id column="t_id" property="id"/> -->
+			<!-- 		    <result column="t_pid" property="pid"/> -->
+			<!-- 		    <result column="t_type_name" property="typeName"/> -->
+			<!-- 	   </collection> -->
+		</resultMap>
+
 
 <!-- colelction 子查询 查询图书类型  -->
 <select id="getBookTypesByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">

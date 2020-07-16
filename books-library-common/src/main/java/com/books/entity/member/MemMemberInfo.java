@@ -234,4 +234,7 @@ public class MemMemberInfo extends BaseEntity
      */
     private Integer authUserId;
 
+
+    private Date expireTime;
+
 }
