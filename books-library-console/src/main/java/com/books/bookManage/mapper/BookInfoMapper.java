@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.books.entity.bookinfo.BookInfoBean;
-import com.books.entity.bookinfo.BookLabelBean;
+import com.books.entity.booklabel.BookLabelBean;
 import com.books.entity.booktype.BookTypeBean;
 
 /**

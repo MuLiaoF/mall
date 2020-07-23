@@ -34,7 +34,7 @@
 			column='id'>
 	    </collection>
 	    
-	    <collection property="bookLabelList" ofType="com.books.entity.bookinfo.BookLabelBean"
+	    <collection property="bookLabelList" ofType="com.books.entity.booklabel.BookLabelBean"
 	     select="com.books.bookManage.mapper.BookInfoMapper.getBookLabelsByBookId"
 			column='id'>
 	    </collection>
@@ -98,25 +98,6 @@
 	</if>
 </select>
 
-	<resultMap id="BaseResultMap1" type="com.books.entity.bookinfo.BookInfoBean">
-			<id column="id" property="id" jdbcType="INTEGER" />
-			<result column="book_name" property="bookName" jdbcType="VARCHAR" />
-			<result column="author" property="author" jdbcType="VARCHAR" />
-			<result column="publisher" property="publisher" jdbcType="VARCHAR" />
-			<result column="img_url_json" property="imgUrlJson" jdbcType="VARCHAR" />
-			<result column="default_img_url" property="defaultImgUrl" jdbcType="VARCHAR" />
-			<result column="create_time" property="createTime" jdbcType="DATE" />
-			<result column="update_time" property="updateTime" jdbcType="DATE" />
-			<result column="isdel" property="isdel" jdbcType="VARCHAR" />
-
-			<!-- 	   <collection property="bookTypeBean" ofType="com.books.entity.booktype.BookTypeBean"> -->
-			<!-- 			<id column="t_id" property="id"/> -->
-			<!-- 		    <result column="t_pid" property="pid"/> -->
-			<!-- 		    <result column="t_type_name" property="typeName"/> -->
-			<!-- 	   </collection> -->
-		</resultMap>
-
-
 <!-- colelction 子查询 查询图书类型  -->
 <select id="getBookTypesByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.booktype.BookTypeBean">
 	SELECT ty.id,ty.pid,ty.type_name typeName,ty.status from tbl_book_info_type t
@@ -125,7 +106,7 @@
 </select>
 
 <!-- colelction 子查询 查询图书标签  -->
-<select id="getBookLabelsByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.bookinfo.BookLabelBean">
+<select id="getBookLabelsByBookId" parameterType="java.lang.Integer" resultType="com.books.entity.booklabel.BookLabelBean">
 	SELECT lb.id,lb.label_name from tbl_book_info_label l
 	LEFT JOIN tbl_book_label lb on l.label_id =lb.id
 	WHERE l.isdel = '0' and l.book_info_id = #{bookId}

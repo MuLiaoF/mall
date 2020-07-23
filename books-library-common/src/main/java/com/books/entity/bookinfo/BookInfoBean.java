@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.books.entity.booklabel.BookLabelBean;
 import com.books.entity.booktype.BookTypeBean;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
