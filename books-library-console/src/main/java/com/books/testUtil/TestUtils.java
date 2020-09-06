@@ -19,5 +19,7 @@ public class TestUtils {
 		DateTime date = DateUtil.date();
 		System.out.println(newFileName);
 		System.out.println(date);
+
+		System.out.println("hutool--");
 	}
 }
