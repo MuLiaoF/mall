@@ -21,5 +21,6 @@ public class TestUtils {
 		System.out.println(date);
 
 		System.out.println("hutool--");
+		System.out.println("hutool--");
 	}
 }
